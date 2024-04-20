@@ -1,8 +1,7 @@
 #pragma once
-#include <stdint.h>
-#include QMK_KEYBOARD_H
-#include "../../../../../../../quantum/keymap_extras/keymap_us_international.h"
-#include "utils.h"
+#include "gameflave.h"
+
+#define SY_EGRV KC_EXEC
 
 bool process_record_user_sym(uint16_t keycode, keyrecord_t* record) {
     switch (keycode) {
@@ -35,11 +34,11 @@ bool process_record_user_sym(uint16_t keycode, keyrecord_t* record) {
             return false;
         case US_AACU:
             if (is_pressed(record)) {
-                tap_code16(US_DGRV);
+                tap_code16(US_ACUT);
                 tap_code16(US_A);
             }
             return false;
-        case LT(0,US_E):
+        case SY_EGRV:
             if (is_pressed(record)) {
                 tap_code16(US_DGRV);
                 tap_code(US_E);
@@ -49,15 +48,10 @@ bool process_record_user_sym(uint16_t keycode, keyrecord_t* record) {
     return true;
 }
 
-void set_rgblight_sym(const bool left_side) {
-    const LCh col = {0.65f, 0.2f, 237.0f};
-    const RGB rgb = oklch_to_srgb(&col);
+void set_rgblight_sym(void) {
+    rgblight_setrgb_range(RGB_SYM, 6,21);
+    rgblight_setrgb_range(RGB_SYM,29,44);
+    rgblight_setrgb_at(RGB_SYM,22);
 
-    if(left_side) {
-        rgblight_setrgb_range(rgb.r, rgb.g, rgb.b, 6,23);
-        rgblight_setrgb_at(rgb.r, rgb.g, rgb.b, 40);
-    } else {
-        rgblight_setrgb_range(rgb.r, rgb.g, rgb.b, 29, 46);
-        rgblight_setrgb_at(rgb.r, rgb.g, rgb.b, 19);
-    }
+    rgblight_setrgb_at(RGB_NUM,44);
 }
