@@ -1,16 +1,17 @@
 #pragma once
-#include <stdint.h>
-#include QMK_KEYBOARD_H
-#include "../../../../../../../quantum/keymap_extras/keymap_us_international.h"
-#include "utils.h"
+#include "gameflave.h"
+
+#define DIRECT_KANA
 
 #define JP_MHEN KC_INT5 // Muhenkan (無変換) -> no convertion
 #define JP_HENK KC_INT4 // Henkan (変換) -> convertion to kanji
-#define JP_HIRA KC_INT2 // Katakana ↔ Hiragana ↔ Rōmaji (カタカナ ↔ ひらがな ↔ ローマ字)
-#define JP_KATA S(KC_INT2)
-#define JP_ROMA ALGR(KC_INT2)
+#define JP_KANA KC_INT2 // Katakana ↔ Hiragana ↔ Rōmaji (カタカナ ↔ ひらがな ↔ ローマ字)
 
 #define SS_KC(keycode, string) case keycode: if(is_pressed(record)) SEND_STRING(string); return false;
+#define TAP_CODES(keycode, tapcode_1, tapcode_2) case keycode: if(is_pressed(record)) {tap_code16(tapcode_1); tap_code16(tapcode_2);} return false;
+
+#ifndef DIRECT_KANA
+#include "sendstring_us_international.h"
 
 enum japanese_keycodes {
     JP_A=SAFE_RANGE,JP_KA,	JP_SA,	JP_TA,	JP_NA,	JP_HA,	JP_MA,	JP_YA,	JP_RA,  JP_WA,
@@ -31,8 +32,30 @@ enum japanese_keycodes {
     JP_S_E         ,JP_S_KE,
     JP_S_O         ,                                                JP_S_YO,
 };
+#else
+enum japanese_keycodes {
+    JP_A=KC_3,  JP_KA=KC_T   ,	JP_SA=KC_X,	JP_TA=KC_Q,	JP_NA=KC_U   ,	JP_HA=KC_F   ,	JP_MA=KC_J   ,	JP_YA=KC_7,	JP_RA=KC_O   ,  JP_WA=KC_0,
+    JP_I=KC_E,  JP_KI=KC_G   ,	JP_SI=KC_D,	JP_TI=KC_A,	JP_NI=KC_I   ,	JP_HI=KC_V   ,	JP_MI=KC_N   ,	            JP_RI=KC_L   ,  JP_WI=KC_NO,
+    JP_U=KC_4,  JP_KU=KC_H   ,	JP_SU=KC_R,	JP_TU=KC_Z,	JP_NU=KC_1   ,	JP_HU=KC_2   ,	JP_MU=KC_NUHS,	JP_YU=KC_8,	JP_RU=KC_DOT ,
+    JP_E=KC_5,  JP_KE=KC_HELP,	JP_SE=KC_P,	JP_TE=KC_W,	JP_NE=KC_COMM,	JP_HE=KC_EQL ,	JP_ME=KC_SLSH,              JP_RE=KC_SCLN,  JP_WE=KC_NO,
+    JP_O=KC_6,  JP_KO=KC_B   ,	JP_SO=KC_C,	JP_TO=KC_S,	JP_NO=KC_K   ,	JP_HO=KC_MINS,	JP_MO=KC_M   ,	JP_YO=KC_9,	JP_RO=KC_INT1,  JP_WO=S(KC_0),  JP_N=KC_Y,
+
+    JP_S_A=S(KC_3),  JP_S_KA=KC_NO,                                                                     JP_S_YA=S(KC_7),            JP_S_WA=S(KC_0),
+    JP_S_I=S(KC_E),
+    JP_S_U=S(KC_4),                         JP_S_TU=S(KC_Z),                                            JP_S_YU=S(KC_8),
+    JP_S_E=S(KC_5),  JP_S_KE=KC_NO,
+    JP_S_O=S(KC_6),                                                                                     JP_S_YO=S(KC_9),
+
+                JP_GA=SAFE_RANGE,  JP_ZA,  JP_DA,                       JP_BA,  JP_PA,
+                JP_GI           ,  JP_ZI,  JP_DI,                       JP_BI,  JP_PI,
+    JP_VU,      JP_GU           ,  JP_ZU,  JP_DU,                       JP_BU,  JP_PU,
+                JP_GE           ,  JP_ZE,  JP_DE,                       JP_BE,  JP_PE,
+                JP_GO           ,  JP_ZO,  JP_DO,                       JP_BO,  JP_PO,
+};
+#endif
 
 bool process_record_user_jp(uint16_t keycode, keyrecord_t* record) {
+#ifndef DIRECT_KANA
     switch(keycode) {
         SS_KC(JP_A,"a")      SS_KC(JP_KA,"ka")	SS_KC(JP_SA,"sa")  SS_KC(JP_TA,"ta")  SS_KC(JP_NA,"na")	 SS_KC(JP_HA,"ha")	SS_KC(JP_MA,"ma")	SS_KC(JP_YA,"ya")	SS_KC(JP_RA,"ra")  SS_KC(JP_WA,"wa")
         SS_KC(JP_I,"i")      SS_KC(JP_KI,"ki")	SS_KC(JP_SI,"si")  SS_KC(JP_TI,"ti")  SS_KC(JP_NI,"ni")	 SS_KC(JP_HI,"hi")	SS_KC(JP_MI,"mi")	                    SS_KC(JP_RI,"ri")  SS_KC(JP_WI,"wi")
@@ -52,6 +75,21 @@ bool process_record_user_jp(uint16_t keycode, keyrecord_t* record) {
         SS_KC(JP_S_E,"xe")   SS_KC(JP_S_KE,"xke")
         SS_KC(JP_S_O,"xo")                                                                                                                      SS_KC(JP_S_YO,"xyo")
     }
+#else
+    switch(keycode) {
+
+                                            TAP_CODES(JP_GA, JP_KA  , KC_LBRC)     TAP_CODES(JP_ZA, JP_SA, KC_LBRC)     TAP_CODES(JP_DA, JP_TA, KC_LBRC)     TAP_CODES(JP_BA, JP_HA, KC_LBRC)     TAP_CODES(JP_PA, JP_HA, KC_RBRC)
+                                            TAP_CODES(JP_GI, JP_KI  , KC_LBRC)     TAP_CODES(JP_ZI, JP_SI, KC_LBRC)     TAP_CODES(JP_DI, JP_TI, KC_LBRC)     TAP_CODES(JP_BI, JP_HI, KC_LBRC)     TAP_CODES(JP_PI, JP_HI, KC_RBRC)
+        TAP_CODES(JP_VU, JP_U, KC_LBRC)     TAP_CODES(JP_GU, JP_KU  , KC_LBRC)     TAP_CODES(JP_ZU, JP_SU, KC_LBRC)     TAP_CODES(JP_DU, JP_TU, KC_LBRC)     TAP_CODES(JP_BU, JP_HU, KC_LBRC)     TAP_CODES(JP_PU, JP_HU, KC_RBRC)
+                                            TAP_CODES(JP_GE, KC_QUOT, KC_LBRC)     TAP_CODES(JP_ZE, JP_SE, KC_LBRC)     TAP_CODES(JP_DE, JP_TE, KC_LBRC)     TAP_CODES(JP_BE, JP_HE, KC_LBRC)     TAP_CODES(JP_PE, JP_HE, KC_RBRC)
+                                            TAP_CODES(JP_GO, JP_KO  , KC_LBRC)     TAP_CODES(JP_ZO, JP_SO, KC_LBRC)     TAP_CODES(JP_DO, JP_TO, KC_LBRC)     TAP_CODES(JP_BO, JP_HO, KC_LBRC)     TAP_CODES(JP_PO, JP_HO, KC_RBRC)
+
+        case JP_KE:
+            if(is_pressed(record))
+                tap_code16(KC_QUOT);
+            return false;
+    }
+#endif
     return true;
 }
 
