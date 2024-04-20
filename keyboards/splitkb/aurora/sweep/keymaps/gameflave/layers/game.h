@@ -1,8 +1,5 @@
 #pragma once
-#include <stdint.h>
-#include QMK_KEYBOARD_H
-#include "../../../../../../../quantum/keymap_extras/keymap_us_international.h"
-#include "utils.h"
+#include "gameflave.h"
 
 bool process_record_user_game(uint16_t keycode, keyrecord_t* record) {
     switch (keycode) {
