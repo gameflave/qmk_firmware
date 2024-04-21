@@ -1,7 +1,9 @@
 #pragma once
 #include "gameflave.h"
 
+#include "keycodes.h"
 #include "layers/base.h"
+#include "layers/functions.h"
 #include "layers/modifiers.h"
 #include "layers/symbols.h"
 #include "layers/numbers.h"
@@ -52,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|---------------+---------------+---------------+---------------+---------------|       |---------------+---------------+---------------+---------------+---------------|
            KC_TAB     ,    KC_LALT    ,    KC_LCTL    ,    KC_LSFT    ,    KC_LGUI    ,            KC_F10     ,     KC_F4     ,     KC_F5     ,     KC_F6     ,    KC_INS     ,
     //|---------------+---------------+---------------+---------------+---------------|       |---------------+---------------+---------------+---------------+---------------|
-           XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,            KC_F11     ,     KC_F1     ,     KC_F2     ,     KC_F3     ,    KC_F13     ,
+           XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,            KC_F11     ,     KC_F1     ,     KC_F2     ,     KC_F3     ,    XXXXXXX    ,
     //|---------------+---------------+---------------+---------------+---------------|       |---------------+---------------+---------------+---------------+---------------|
     //                               |-------------------------+-------------------------| |-------------------------+-------------------------|
                                                 XXXXXXX        ,         XXXXXXX         ,            XXXXXXX        ,         KC_ENT
@@ -288,6 +290,9 @@ void housekeeping_task_user(void) {
             break;
         case GAME_1:
             set_rgblight_game(1);
+            break;
+        case FN:
+            set_rgblight_fn();
             break;
         case NAV_L:
             set_rgblight_nav(LEFT);
