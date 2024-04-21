@@ -8,21 +8,25 @@ bool process_record_user_nav(uint16_t keycode, keyrecord_t* record) {
     return true;
 }
 
-void set_rgblight_nav(const uint8_t side_index) {
-    rgblight_setrgb_at(RGB_BLACK, 7);
-    rgblight_setrgb_at(RGB_BLACK,10);
-    rgblight_setrgb_at(RGB_BLACK,22);
-    rgblight_setrgb_range(RGB_BLACK,16,21);
+void set_rgblight_nav(const enum layer_sides side) {
+    if (side == LEFT) {
+        rgblight_setrgb_at(RGB_BLACK, 6);
+        rgblight_setrgb_at(RGB_BLACK, 8);
+        rgblight_setrgb_range(RGB_BLACK,16,21);
 
-    rgblight_setrgb_at(RGB_MOD, 6);
-    rgblight_setrgb_range(RGB_MOD, 8,10);
-    rgblight_setrgb_range(RGB_MOD,11,16);
+        rgblight_setrgb_at(RGB_BLACK,29);
+        rgblight_setrgb_at(RGB_BLACK,32);
+        rgblight_setrgb_range(RGB_BLACK,39,44);
 
-    rgblight_setrgb_at(RGB_BLACK,31);
-    rgblight_setrgb_at(RGB_BLACK,33);
-    rgblight_setrgb_range(RGB_BLACK,39,44);
+    } else {
+        rgblight_setrgb_at(RGB_BLACK, 7);
+        rgblight_setrgb_at(RGB_BLACK,10);
+        rgblight_setrgb_range(RGB_BLACK,16,21);
 
-    rgblight_setrgb_at(RGB_BASE,44);
+        rgblight_setrgb_at(RGB_BLACK,31);
+        rgblight_setrgb_at(RGB_BLACK,33);
+        rgblight_setrgb_range(RGB_BLACK,39,44);
+    }
 
     /*
     rgblight_setrgb_at(RGB_BLACK, 6);

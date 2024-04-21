@@ -2,15 +2,12 @@
 #include "gameflave.h"
 
 #include "layers/base.h"
+#include "layers/modifiers.h"
 #include "layers/symbols.h"
 #include "layers/numbers.h"
 #include "layers/navigation.h"
 #include "layers/game.h"
 #include "layers/japanese.h"
-
-tap_dance_action_t tap_dance_actions[] = {
-    TAP_DANCE_ACTIONS_BASE
-};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT(
@@ -94,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            _______    ,    _______    ,    _______    ,    _______    ,    _______    ,            _______    ,    _______    ,    _______    ,    _______    ,    _______    ,
     //|---------------+---------------+---------------+---------------+---------------|       |---------------+---------------+---------------+---------------+---------------|
     //                               |-------------------------+-------------------------| |-------------------------+-------------------------|
-                                                _______        ,         _______         ,           TG(NAV_R)       ,         KC_ENT
+                                                _______        ,         TG(MOD_L)       ,           _______         ,         KC_ENT
     //                               |-------------------------+-------------------------| |-------------------------+-------------------------|
     ),
     [MOD_R] = LAYOUT(
@@ -106,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            _______    ,    _______    ,    _______    ,    _______    ,    _______    ,            _______    ,    _______    ,    _______    ,    _______    ,    _______    ,
     //|---------------+---------------+---------------+---------------+---------------|       |---------------+---------------+---------------+---------------+---------------|
     //                               |-------------------------+-------------------------| |-------------------------+-------------------------|
-                                                _______        ,         TG(NAV_L)       ,           _______         ,         KC_ENT
+                                                _______        ,         _______       ,             TG(MOD_R)       ,         KC_ENT
     //                               |-------------------------+-------------------------| |-------------------------+-------------------------|
     ),
        /*
@@ -293,10 +290,14 @@ void housekeeping_task_user(void) {
             set_rgblight_game(1);
             break;
         case NAV_L:
-            set_rgblight_nav(2);
+            set_rgblight_nav(LEFT);
+        case MOD_R:
+            set_rgblight_mod(RIGHT);
             break;
         case NAV_R:
-            set_rgblight_nav(1);
+            set_rgblight_nav(RIGHT);
+        case MOD_L:
+            set_rgblight_mod(LEFT);
             break;
         case NUM:
             set_rgblight_num();
