@@ -7,8 +7,6 @@
 #include "utils.h"
 #include "colors.h"
 
-#define TAP_DANCE_INDEX_BASE 0
-
 enum layer_names {
     BASE,
     SYM,
@@ -24,4 +22,9 @@ enum layer_names {
     JP_2,
     JP_3,
     JP_4,
+};
+
+enum layer_sides {
+    LEFT,
+    RIGHT,
 };
