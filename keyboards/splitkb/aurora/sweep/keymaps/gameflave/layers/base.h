@@ -1,9 +1,6 @@
 #pragma once
 #include "gameflave.h"
 
-#define BA_LAYER_R TD(TAP_DANCE_INDEX_BASE)
-#define BA_LAYER_L TD(TAP_DANCE_INDEX_BASE + 1)
-
 bool process_record_user_base(uint16_t keycode, keyrecord_t* record) {
     switch (keycode) {
         case US_ACUT:
@@ -57,12 +54,15 @@ const key_override_t s_comm_dot = ko_make_basic(MOD_MASK_SHIFT, US_COMM, US_DOT)
 
 #define KEY_OVERRIDES_BASE &s_comm_dot,
 
-const uint16_t PROGMEM ucomm_combo[] = {US_U, US_COMM, COMBO_END};
-const uint16_t PROGMEM pt_combo[] = {US_P, US_T, COMBO_END};
 
-#define KEY_COMBOS_BASE COMBO(ucomm_combo, TG(NAV_L)), COMBO(pt_combo, TG(NAV_R)),
+const uint16_t PROGMEM eu_combo[] = {US_E, US_U, COMBO_END};
+const uint16_t PROGMEM ts_combo[] = {US_T, US_S, COMBO_END};
 
-#define TAP_DANCE_ACTIONS_BASE [TAP_DANCE_INDEX_BASE] = ACTION_TAP_DANCE_DOUBLE(MO(SYM), TG(NAV_L)), [TAP_DANCE_INDEX_BASE+1] = ACTION_TAP_DANCE_DOUBLE(MO(NUM), TG(NAV_R)),
+const uint16_t PROGMEM iu_combo[] = {US_I, US_U, COMBO_END};
+const uint16_t PROGMEM tr_combo[] = {US_T, US_R, COMBO_END};
+
+#define KEY_COMBOS_BASE COMBO(eu_combo, TG(NAV_L)), COMBO(ts_combo, TG(NAV_R)), COMBO(iu_combo, TG(MOD_L)), COMBO(tr_combo, TG(MOD_R)),
+
 
 void set_rgblight_base(void) {
     rgblight_setrgb_range(RGB_BASE,  6,23);
