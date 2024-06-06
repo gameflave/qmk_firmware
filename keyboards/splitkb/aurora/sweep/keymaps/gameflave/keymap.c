@@ -2,14 +2,14 @@
 #include "gameflave.h"
 
 #include "keycodes.h"
-#include "layers/base.h"
-#include "layers/functions.h"
-#include "layers/modifiers.h"
-#include "layers/symbols.h"
-#include "layers/numbers.h"
-#include "layers/navigation.h"
-#include "layers/game.h"
-#include "layers/japanese.h"
+#include "layers/00_base.h"
+#include "layers/01_symbols.h"
+#include "layers/02_numbers.h"
+#include "layers/03_functions.h"
+#include "layers/04-05_navigation.h"
+#include "layers/06-07_modifiers.h"
+#include "layers/08-09_game.h"
+#include "layers/10-13_japanese.h"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT(
@@ -246,18 +246,8 @@ uint32_t underglow_animation_callback(uint32_t trigger_time, void* cb_arg) {
     RGB underglow_base_rgb = oklch_to_srgb(&underglow_base_lch);
     underglow_base_hue = (underglow_base_hue + 1) % 361;
 
-    rgblight_setrgb_at(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b, 0 );
-    rgblight_setrgb_at(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b, 1 );
-    rgblight_setrgb_at(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b, 2 );
-    rgblight_setrgb_at(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b, 3 );
-    rgblight_setrgb_at(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b, 4 );
-    rgblight_setrgb_at(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b, 5 );
-    rgblight_setrgb_at(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b, 28);
-    rgblight_setrgb_at(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b, 27);
-    rgblight_setrgb_at(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b, 26);
-    rgblight_setrgb_at(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b, 25);
-    rgblight_setrgb_at(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b, 24);
-    rgblight_setrgb_at(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b, 23);
+    rgblight_setrgb_range(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b, 0, 6);
+    rgblight_setrgb_range(underglow_base_rgb.r, underglow_base_rgb.g, underglow_base_rgb.b,23,29);
 
     return 50;
 }
