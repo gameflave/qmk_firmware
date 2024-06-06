@@ -3,10 +3,10 @@
 #include "color.h"
 
 #define RGB_BASE 96, 96, 96
-#define RGB_SYM  RGB_TEAL
+#define RGB_SYM  18, 40, 240
 #define RGB_NUM  RGB_GOLD
 #define RGB_NAV  RGB_GREEN
-#define RGB_MOD  RGB_RED
+#define RGB_MOD  230, 2, 2
 #define RGB_FN   RGB_PURPLE
 
 float clampf(float val, float minVal, float maxVal) {
