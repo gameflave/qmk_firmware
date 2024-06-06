@@ -3,7 +3,6 @@
 #include <sys/types.h>
 
 #include QMK_KEYBOARD_H
-#include "keycode.h"
 
 static bool should_clear_oneshot_layer = false;
 
