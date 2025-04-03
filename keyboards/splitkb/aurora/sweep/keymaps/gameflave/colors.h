@@ -2,6 +2,8 @@
 #include <math.h>
 #include "color.h"
 
+#undef RGB_MOD
+
 #define RGB_BASE 96, 96, 96
 #define RGB_SYM  18, 40, 240
 #define RGB_NUM  RGB_GOLD
