@@ -11,6 +11,8 @@
 #include "layers/08-09_game.h"
 #include "layers/10-13_japanese.h"
 
+tap_dance_action_t tap_dance_actions[] = {};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT(
     //|---------------+---------------+---------------+---------------+---------------|       |---------------+---------------+---------------+---------------+---------------|
@@ -231,9 +233,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     return true;
 }
 
-const key_override_t **key_overrides = (const key_override_t *[]){
+const key_override_t *key_overrides[] = {
     KEY_OVERRIDES_BASE
-    NULL
 };
 
 combo_t key_combos[] = {

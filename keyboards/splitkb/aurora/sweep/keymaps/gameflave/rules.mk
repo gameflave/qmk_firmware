@@ -1,0 +1,22 @@
+
+DEFAULT_FOLDER = splitkb/aurora/sweep/rev1
+CONVERT_TO = liatris
+
+#Optimisation
+SPACE_CADET_ENABLE = no
+GRAVE_ESC_ENABLE = no
+MAGIC_ENABLE = no
+MUSIC_ENABLE = no
+AVR_USE_MINIMAL_PRINTF = yes
+
+###################################
+CAPS_WORD_ENABLE = yes
+KEY_OVERRIDE_ENABLE = yes
+DEFERRED_EXEC_ENABLE = yes
+SEND_STRING_ENABLE = yes
+TAP_DANCE_ENABLE = yes
+COMBO_ENABLE = yes
+
+RGB_MATRIX_ENABLE = no
+RGBLIGHT_ENABLE = yes
+WS2812_DRIVER = vendor
