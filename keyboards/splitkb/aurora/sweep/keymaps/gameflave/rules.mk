@@ -3,6 +3,7 @@ CONVERT_TO = liatris
 
 VPATH += keyboards/gboards/
 
+REPEAT_KEY_ENABLE = yes
 COMBO_ENABLE = yes
 CAPS_WORD_ENABLE = yes
 SEND_STRING_ENABLE = yes

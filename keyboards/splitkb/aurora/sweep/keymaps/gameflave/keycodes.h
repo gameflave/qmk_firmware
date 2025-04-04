@@ -5,7 +5,7 @@
 #include "quantum_keycodes.h"
 #include "keymap_us_international.h"
 
-enum layers {
+enum layers____ {
     _BASE,
     _SHRT,
     _NAV,
@@ -22,7 +22,7 @@ enum layers {
 };
 
 enum custom_keycodes {
-    AGRV = SAFE_RANGE,
+    AGRV = QK_USER,
     EGRV,
     GRV,
     QUOT,

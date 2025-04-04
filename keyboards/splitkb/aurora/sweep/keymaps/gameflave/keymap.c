@@ -1,10 +1,12 @@
-#include "action.h"
-#include "keycodes.h"
-#include "keymap_us_international.h"
-#include "quantum.h"
-
 #include QMK_KEYBOARD_H
-/* #include "g/keymap_combo.h" */
+
+#include "action.h"
+#include "quantum.h"
+#include "keymap_us_international.h"
+#include "g/keymap_combo.h"
+
+#include "keycodes.h"
+
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
