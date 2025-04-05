@@ -1,3 +1,4 @@
+#include "action_layer.h"
 #include QMK_KEYBOARD_H
 
 #include "action.h"
@@ -15,6 +16,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         US_A   ,US_I   ,US_O   ,US_U   ,US_COMM,      US_P    ,US_T    ,US_S   ,US_R   ,US_N,
         US_K   ,US_Y   ,US_J   ,US_DOT ,US_W   ,      US_G    ,US_C    ,US_M   ,US_H   ,US_V,
                                 SHRT   ,E      ,      SPACE   ,XXXXXXX
+    ),
+    [_BSYM] = LAYOUT(
+        US_UNDS,US_LPRN,US_RPRN,_______, _______,     _______,_______,_______,_______,_______ ,
+        _______,_______,_______,_______, _______,     _______,_______,_______,_______,_______ ,
+        _______,_______,_______,_______, _______,     _______,_______,_______,_______,_______ ,
+                                _______,_______,      _______,_______
     ),
     [_SHRT] = LAYOUT(
         C(US_E),US_S,   US_R,   US_G,   _______,      _______, NAV,     MOD,    SYM,    _______,
@@ -64,12 +71,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
     switch (keycode) {
         // These are dead key by default make the non-dead version
         case GRV:
+            if (record->event.pressed) {
+                tap_code16(US_DGRV);
+                tap_code16(KC_SPACE);
+            }
+            return true;
         case TIL:
+            if (record->event.pressed) {
+                tap_code16(US_DTIL);
+                tap_code16(KC_SPACE);
+            }
+            return true;
         case QUOT:
+            if (record->event.pressed) {
+                tap_code16(US_ACUT);
+                tap_code16(KC_SPACE);
+            }
+            return true;
         case CIR:
-            if(record->event.pressed)
-                { tap_code(keycode); tap_code(KC_SPACE); }
-        return true;
+            if (record->event.pressed) {
+                tap_code16(US_DCIR);
+                tap_code16(KC_SPACE);
+            }
+            return true;
 
         case AGRV:
             if(record->event.pressed)
@@ -78,6 +102,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
         case EGRV:
             if(record->event.pressed)
                 { tap_code(US_DGRV); tap_code(US_E); }
+        return true;
+
+        // Disable numwords
+        case US_LPRN:
+        case US_RPRN:
+        case US_K:
+        case US_J:
+        case S(US_G):
+            if(record->event.pressed && get_highest_layer(layer_state)==_NUM)
+                layer_off(_NUM);
         return true;
 
         default:
