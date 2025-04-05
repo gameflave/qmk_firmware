@@ -7,6 +7,7 @@
 
 enum layers____ {
     _BASE,
+    _BSYM,
     _SHRT,
     _NAV,
     _WNAV,
@@ -29,6 +30,12 @@ enum custom_keycodes {
     CIR,
     TIL,
     CANCEL,
+    NEQL,
+    GRT,
+    INF,
+    QU,
+    AROW,
+
 };
 
 #define SHRT MO(_SHRT)
@@ -40,3 +47,4 @@ enum custom_keycodes {
 #define E    LT(_NAV,US_E)
 #define SPACE LT(_WNAV,KC_SPACE)
 #define C_UP LCTL_T(KC_UP)
+#define NUMW TG(_NUM)
