@@ -1,4 +1,5 @@
 #include "action_layer.h"
+#include "color.h"
 #include QMK_KEYBOARD_H
 
 #include "action.h"
@@ -42,10 +43,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 _______,XXXXXXX,      _______,_______
     ),
     [_NUM] = LAYOUT(
-        US_UNDS,US_LPRN,US_RPRN,US_8   ,_______,      _______,US_9   ,KC_PPLS,KC_PMNS,KC_PAST,
-        US_6   ,US_4   ,US_0   ,US_2   ,_______,      KC_PSLS,US_3   ,US_1   ,US_5   ,US_7   ,
-        _______,S(US_G),_______,KC_PDOT,_______,      _______,_______,_______,_______,_______,
-                                _______,_______,      CANCEL ,_______
+        US_UNDS,US_LPRN,US_RPRN,US_8   ,XXXXXXX,      XXXXXXX,US_9   ,KC_PPLS,KC_PMNS,KC_PAST,
+        US_6   ,US_4   ,US_0   ,US_2   ,US_COMM,      KC_PSLS,US_3   ,US_1   ,US_5   ,US_7   ,
+        US_K   ,S(US_G),US_J   ,KC_PDOT,XXXXXXX,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+                                XXXXXXX,CANCEL ,      SPACE  ,XXXXXXX
     ),
     [_FUN] = LAYOUT(
         _______,_______,_______,KC_F8  ,_______,      _______,KC_F9  ,_______,_______,_______,
@@ -94,14 +95,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
                 tap_code16(KC_SPACE);
             }
             return true;
+        case DQUOT:
+            if (record->event.pressed) {
+                tap_code16(S(US_ACUT));
+                tap_code16(KC_SPACE);
+            }
+            return true;
 
         case AGRV:
             if(record->event.pressed)
-                { tap_code(US_DGRV); tap_code(US_A); }
+                { tap_code16(US_DGRV); tap_code16(US_A); }
         return true;
         case EGRV:
             if(record->event.pressed)
-                { tap_code(US_DGRV); tap_code(US_E); }
+                { tap_code16(US_DGRV); tap_code16(US_E); }
+        return true;
+        case ECIR:
+            if(record->event.pressed)
+                { tap_code16(US_DCIR); tap_code16(US_E); }
         return true;
 
         // Disable numwords
@@ -112,9 +123,71 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
         case S(US_G):
             if(record->event.pressed && get_highest_layer(layer_state)==_NUM)
                 layer_off(_NUM);
+            return true;
+
+        case CANCEL:
+            if (record->event.pressed)
+                layer_and(1);
         return true;
+        case NEQL:
+            if (record->event.pressed) {
+                tap_code16(US_EXLM);
+                tap_code16(US_EQL);
+            }
+            return true;
+        case GRT:
+            if (record->event.pressed) {
+                tap_code16(US_LABK);
+                tap_code16(US_EQL);
+            }
+            return true;
+        case INF:
+            if (record->event.pressed) {
+                tap_code16(US_RABK);
+                tap_code16(US_EQL);
+            }
+            return true;
+        case QU:
+            if (record->event.pressed) {
+                tap_code16(US_Q);
+                tap_code16(US_U);
+            }
+            return true;
+        case AROW:
+            if (record->event.pressed) {
+                tap_code16(US_MINS);
+                tap_code16(US_RABK);
+            }
+            return true;
 
         default:
             return true;
+    }
+}
+
+void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    rgblight_sethsv_range(HSV_WHITE,0,45);
+    switch(get_highest_layer(layer_state)) {
+    case _BSYM:
+        rgblight_sethsv_range(HSV_BLUE,6,9);
+        break;
+    case _SHRT:
+        rgblight_sethsv_range(HSV_GREEN,6,10);
+        rgblight_sethsv_range(HSV_GREEN,11,21);
+        rgblight_sethsv_range(HSV_GREEN,23,26);
+        rgblight_sethsv_range(HSV_GREEN,28,37);
+        rgblight_sethsv_at(HSV_GREEN,38);
+        rgblight_sethsv_at(HSV_GREEN,40);
+        break;
+    case _NUM:
+        rgblight_sethsv_at(HSV_GOLDENROD,6);
+        rgblight_sethsv_range(HSV_CHARTREUSE,7,9);
+        rgblight_sethsv_at(HSV_GOLDENROD,9);
+        rgblight_sethsv_range(HSV_GOLDENROD,11,16);
+        rgblight_sethsv_range(HSV_CHARTREUSE,16,19);
+        rgblight_sethsv_at(HSV_GOLDENROD,19);
+        rgblight_sethsv_range(HSV_BLACK,20,22);
+        break;
+
     }
 }
