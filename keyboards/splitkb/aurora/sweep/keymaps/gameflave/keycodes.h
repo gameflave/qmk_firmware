@@ -45,7 +45,8 @@ enum custom_keycodes {
 #define SYM  TG(_SYM)
 #define GAME TG(_GAME)
 #define JAP  TG(_JAP1)
-#define E    LT(_NAV,US_E)
-#define SPACE LT(_WNAV,KC_SPACE)
+// #define E    LT(_WNAV,US_E)
+#define E US_E
+#define SPACE LT(_NAV,KC_SPACE)
 #define C_UP LCTL_T(KC_UP)
 #define NUMW TG(_NUM)
