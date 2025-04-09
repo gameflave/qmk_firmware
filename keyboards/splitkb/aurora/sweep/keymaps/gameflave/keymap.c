@@ -1,5 +1,7 @@
+#include <stdint.h>
 #include "action_layer.h"
 #include "color.h"
+#include "config.h"
 #include QMK_KEYBOARD_H
 
 #include "action.h"
@@ -26,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_SHRT] = LAYOUT(
         C(US_E),US_S,   US_R,   US_G,   _______,      _______, NAV,     MOD,    SYM,    _______,
-        C(US_X),C(US_S),C(US_C),C(US_Z),C(US_V),      US_DGRV, US_DIAE, US_DCIR,US_ACUT,US_DTIL,
+        C(US_X),C(US_C),C(US_S),C(US_V),C(US_Z),      US_DGRV, US_DIAE, US_DCIR,US_ACUT,US_DTIL,
         C(US_B),C(US_W),C(US_D),C(US_R),S(KC_F1),     KC_PSCR, GAME,    US_CURR,JAP,    _______,
                                 SHRT,   US_E,         KC_SPACE,MO(_FUN)
     ),
@@ -34,7 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,_______,_______,_______, _______,     _______,_______,_______,_______,_______ ,
         KC_LGUI,KC_HOME,C_UP   ,KC_END , KC_PGUP,     _______,KC_LEFT,KC_DOWN,KC_UP  ,KC_RIGHT,
         KC_ENT ,KC_LEFT,KC_DOWN,KC_RIGHT,KC_PGDN,     _______,_______,_______,_______,_______ ,
-                                _______, _______,     MO(_WNAV),_______
+                                _______,MO(_WNAV),    CANCEL ,_______
     ),
     [_WNAV] = LAYOUT(
         _______,_______,_______,G(US_8),_______,      _______,G(US_9),_______,_______,_______,
@@ -66,41 +68,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,US_PERC,US_LBRC,_______,GRV    ,      _______,_______,US_RBRC,US_PIPE,_______,
                                 _______,_______,      _______,_______
     ),
+    [_GAME] = LAYOUT(
+        KC_ESC ,US_1   ,US_2   ,US_3   ,US_4   ,      US_5   ,US_6   ,US_7   ,US_8   ,US_9   ,
+        KC_TAB ,US_Q   ,US_W   ,US_E   ,US_R   ,      US_T   ,US_Y   ,US_U   ,US_I   ,US_O   ,
+        KC_LSFT,US_A   ,US_S   ,US_D   ,US_F   ,      US_G   ,US_H   ,US_J   ,US_K   ,US_L   ,
+                                KC_RCTL,KC_SPACE,     CANCEL ,XXXXXXX
+    ),
 };
+
+#define UNDEAD(Key,DKey) case Key: if(record->event.pressed) {tap_code16(DKey);tap_code16(KC_SPACE);} return true;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record){
     switch (keycode) {
         // These are dead key by default make the non-dead version
-        case GRV:
-            if (record->event.pressed) {
-                tap_code16(US_DGRV);
-                tap_code16(KC_SPACE);
-            }
-            return true;
-        case TIL:
-            if (record->event.pressed) {
-                tap_code16(US_DTIL);
-                tap_code16(KC_SPACE);
-            }
-            return true;
-        case QUOT:
-            if (record->event.pressed) {
-                tap_code16(US_ACUT);
-                tap_code16(KC_SPACE);
-            }
-            return true;
-        case CIR:
-            if (record->event.pressed) {
-                tap_code16(US_DCIR);
-                tap_code16(KC_SPACE);
-            }
-            return true;
-        case DQUOT:
-            if (record->event.pressed) {
-                tap_code16(S(US_ACUT));
-                tap_code16(KC_SPACE);
-            }
-            return true;
+        UNDEAD(GRV,US_DGRV)
+        UNDEAD(TIL, US_DTIL)
+        UNDEAD(QUOT, US_ACUT)
+        UNDEAD(CIR, US_DCIR)
+        UNDEAD(DQUOT, S(US_ACUT))
 
         case AGRV:
             if(record->event.pressed)
@@ -121,14 +106,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
         case US_K:
         case US_J:
         case S(US_G):
+        case SPACE:
+        case KC_ENT:
             if(record->event.pressed && get_highest_layer(layer_state)==_NUM)
                 layer_off(_NUM);
             return true;
-
         case CANCEL:
             if (record->event.pressed)
                 layer_and(1);
-        return true;
+        return false;
         case NEQL:
             if (record->event.pressed) {
                 tap_code16(US_EXLM);
@@ -163,6 +149,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
         default:
             return true;
     }
+}
+
+uint16_t get_combo_term(uint16_t combo_index, combo_t* combo){
+    switch (combo->keycode) {
+        case CW_TOGG:
+        case NUMW:
+        case KC_LCTL:
+            return 50;
+    }
+    return COMBO_TERM;
 }
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
