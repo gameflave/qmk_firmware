@@ -38,6 +38,7 @@ enum custom_keycodes_ {
     AROW,
     DQUOT,
     ECIR,
+    AT_U,
 };
 
 #define SHRT MO(_SHRT)
