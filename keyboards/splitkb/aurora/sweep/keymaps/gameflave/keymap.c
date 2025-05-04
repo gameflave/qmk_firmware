@@ -46,9 +46,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 _______,XXXXXXX,      _______,_______
     ),
     [_NUM] = LAYOUT(
-        US_UNDS,US_LPRN,US_RPRN,US_8   ,XXXXXXX,      XXXXXXX,US_9   ,KC_PPLS,KC_PMNS,KC_PAST,
+        US_UNDS,US_LPRN,US_RPRN,US_8   ,_______,      AT_U   ,US_9   ,KC_PPLS,KC_PMNS,KC_PAST,
         US_6   ,US_4   ,US_0   ,US_2   ,US_COMM,      KC_PSLS,US_3   ,US_1   ,US_5   ,US_7   ,
-        US_K   ,S(US_G),US_J   ,KC_PDOT,XXXXXXX,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+        US_K   ,S(US_G),US_J   ,US_DOT ,XXXXXXX,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
                                 XXXXXXX,CANCEL ,      SPACE  ,XXXXXXX
     ),
     [_FUN] = LAYOUT(
@@ -171,6 +171,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
                 tap_code16(US_RABK);
             }
             return true;
+
+        case AT_U:
+            if (record->event.pressed) {
+                tap_code16(US_AT);
+                tap_code16(US_U);
+            }
+
 #ifndef DIRECT_KANA
         SS_KC(JP_A,"a")      SS_KC(JP_KA,"ka")	SS_KC(JP_SA,"sa")  SS_KC(JP_TA,"ta")  SS_KC(JP_NA,"na")	 SS_KC(JP_HA,"ha")	SS_KC(JP_MA,"ma")	SS_KC(JP_YA,"ya")	SS_KC(JP_RA,"ra")  SS_KC(JP_WA,"wa")
         SS_KC(JP_I,"i")      SS_KC(JP_KI,"ki")	SS_KC(JP_SI,"si")  SS_KC(JP_TI,"ti")  SS_KC(JP_NI,"ni")	 SS_KC(JP_HI,"hi")	SS_KC(JP_MI,"mi")	                    SS_KC(JP_RI,"ri")  SS_KC(JP_WI,"wi")
