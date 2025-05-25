@@ -34,15 +34,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 SHRT,   US_E,         KC_SPACE,MO(_FUN)
     ),
     [_NAV] = LAYOUT(
-        _______,_______,_______,_______, _______,     _______,_______,_______,_______,_______ ,
-        KC_LGUI,KC_HOME,C_UP   ,KC_END , KC_PGUP,     _______,KC_LEFT,KC_DOWN,KC_UP  ,KC_RIGHT,
-        KC_ENT ,KC_LEFT,KC_DOWN,KC_RIGHT,KC_PGDN,     _______,_______,_______,_______,_______ ,
+        _______,_______,_______,_______,_______,     KC_PGUP,KC_HOME,_______,KC_END ,_______ ,
+        KC_LGUI,KC_LALT,KC_LCTL,KC_LSFT,_______,     KC_PGDN,KC_LEFT,KC_DOWN,KC_UP  ,KC_RIGHT,
+        _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______ ,
                                 _______,MO(_WNAV),    CANCEL ,_______
     ),
     [_WNAV] = LAYOUT(
         _______,_______,_______,G(US_8),_______,      _______,G(US_9),_______,_______,_______,
         G(US_6),G(US_4),G(US_0),G(US_2),_______,      _______,G(US_3),G(US_1),G(US_5),G(US_7),
-        _______,_______,_______,_______,_______,      _______,_______,_______,_______,_______,
+        KC_LGUI,KC_LALT,KC_LCTL,KC_LSFT,_______,      _______,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI,
                                 _______,XXXXXXX,      _______,_______
     ),
     [_NUM] = LAYOUT(
