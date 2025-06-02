@@ -241,6 +241,17 @@ uint16_t get_combo_term(uint16_t combo_index, combo_t* combo){
     return COMBO_TERM;
 }
 
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+        case _GAME:
+            combo_disable();
+            break;
+        default:
+            combo_enable();
+        }
+    return state;
+}
+
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     rgblight_sethsv_range(HSV_WHITE,0,45);
     switch(get_highest_layer(layer_state)) {
