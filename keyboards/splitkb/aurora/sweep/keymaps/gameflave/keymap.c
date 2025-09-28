@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC ,US_1   ,US_2   ,US_3   ,US_4   ,      US_5   ,US_6   ,US_7   ,US_8   ,US_9   ,
         KC_TAB ,US_Q   ,US_W   ,US_E   ,US_R   ,      US_T   ,US_Y   ,US_U   ,US_I   ,US_O   ,
         KC_LSFT,US_A   ,US_S   ,US_D   ,US_F   ,      US_G   ,US_H   ,US_J   ,US_K   ,US_L   ,
-                                KC_RCTL,KC_SPACE,     CANCEL ,XXXXXXX
+                                KC_LCTL,KC_SPACE,     CANCEL ,XXXXXXX
     ),
     [_JAP1] = LAYOUT(
             JP_RA     ,     JP_RU     ,     JP_KO     ,     JP_HA     ,     JP_YO     ,             JP_KI     ,     JP_NO     ,     JP_KU     ,     JP_A      ,     JP_RE     ,
