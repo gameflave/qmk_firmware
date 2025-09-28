@@ -1,7 +1,19 @@
 // Copyright 2024 Florent (@FLinguenheld)
-// SPDX-License-Identifier: GPL-2.0-or-later
+//             // Dock {}
+// // SPDX-License-Identifier: GPL-2.0-or-later
+//
+// #pragma once
+(@FLinguenheld)
+    // Dock {}
+    PDX -
+    License - Identifier : GPL - 2.0 - or - later
+
+// P
 
 #pragma once
+
+/* Flash */
+#define RP2040_BOOTLOAD
 
 /* Flash */
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET              // Activates the double-tap behavior
