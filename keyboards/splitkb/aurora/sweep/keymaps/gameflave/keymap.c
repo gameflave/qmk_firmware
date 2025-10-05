@@ -1,17 +1,13 @@
 #include <stdint.h>
-#include "action_layer.h"
-#include "color.h"
-#include "config.h"
-#include "quantum_keycodes.h"
-#include QMK_KEYBOARD_H
-
-#include "action.h"
-#include "quantum.h"
-#include "keymap_us_international.h"
-#include "g/keymap_combo.h"
 
 #include "keycodes.h"
 
+#include QMK_KEYBOARD_H
+
+#include "keymap_us_international.h"
+#include "g/keymap_combo.h" // Get combos from combos.def
+
+#include "config.h"
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -19,25 +15,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         AGRV   ,EGRV   ,US_EACU,US_B   ,QK_REP ,      US_F    ,US_D    ,US_L   ,QUOT   ,US_X,
         US_A   ,US_I   ,US_O   ,US_U   ,US_COMM,      US_P    ,US_T    ,US_S   ,US_R   ,US_N,
         US_K   ,US_Y   ,US_J   ,US_DOT ,US_W   ,      US_G    ,US_C    ,US_M   ,US_H   ,US_V,
-                                SHRT   ,E      ,      SPACE   ,MO(_NUM)
+                                SHRT   ,US_E   ,      SPACE   ,MO(_NUM)
     ),
     [_BSYM] = LAYOUT(
-        US_UNDS,US_LPRN,US_RPRN,_______,_______,     _______,_______,_______,_______,_______ ,
-        _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______ ,
-        _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______ ,
+        US_UNDS,US_LPRN,US_RPRN,_______,_______,     _______,_______,_______,_______,_______,
+        _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______,
+        _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______,
                                 _______,_______,     _______,_______
     ),
     [_SHRT] = LAYOUT(
-        C(US_E),US_S,   US_R,   US_G,   _______,      _______, NAV,     MOD,    SYM,    _______,
-        C(US_X),C(US_C),C(US_S),C(US_V),C(US_Z),      US_DGRV, US_DIAE, US_DCIR,US_ACUT,US_DTIL,
-        C(US_B),C(US_W),C(US_D),C(US_R),S(KC_F1),     KC_PSCR, GAME,    US_CURR,JAP,    _______,
-                                SHRT,   US_E,         KC_SPACE,MO(_FUN)
+        C(US_E),US_S,   US_R,   US_G,   _______,      _______,  NAV  ,_______,_______,_______,
+        C(US_X),C(US_C),C(US_S),C(US_V),C(US_Z),      US_DGRV,US_DIAE,US_DCIR,US_ACUT,US_DTIL,
+        C(US_B),C(US_W),C(US_D),C(US_R),S(KC_F1),     KC_PSCR,  GAME ,US_CURR,  JAP  ,_______,
+                                SHRT,   _______,      KC_SPACE,MO(_FUN)
     ),
     [_NAV] = LAYOUT(
         _______,_______,_______,_______,_______,     KC_PGUP,KC_HOME,_______,KC_END ,_______ ,
         KC_LGUI,KC_LALT,KC_LCTL,KC_LSFT,_______,     KC_PGDN,KC_LEFT,KC_DOWN,KC_UP  ,KC_RIGHT,
         _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______ ,
-                                _______,MO(_WNAV),    CANCEL ,_______
+                                _______,MO(_WNAV),   _______,_______
     ),
     [_WNAV] = LAYOUT(
         _______,_______,_______,G(US_8),_______,      _______,G(US_9),_______,_______,_______,
@@ -46,10 +42,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 _______,XXXXXXX,      _______,_______
     ),
     [_NUM] = LAYOUT(
-        US_UNDS,US_LPRN,US_RPRN,US_8   ,_______,      AT_U   ,US_9   ,KC_PPLS,KC_PMNS,KC_PAST,
+        US_UNDS,US_LPRN,US_RPRN,US_8   ,AT_U   ,      _______,US_9   ,KC_PPLS,KC_PMNS,KC_PAST,
         US_6   ,US_4   ,US_0   ,US_2   ,US_COMM,      KC_PSLS,US_3   ,US_1   ,US_5   ,US_7   ,
         US_K   ,S(US_G),US_J   ,US_DOT ,XXXXXXX,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
-                                XXXXXXX,CANCEL ,      SPACE  ,XXXXXXX
+                                XXXXXXX,XXXXXXX,      SPACE  ,XXXXXXX
     ),
     [_FUN] = LAYOUT(
         _______,_______,_______,KC_F8  ,_______,      _______,KC_F9  ,_______,_______,_______,
@@ -57,52 +53,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,_______,_______,_______,_______,      _______,_______,_______,_______,_______,
                                 _______,_______,      _______,_______
     ),
-    [_MOD] = LAYOUT(
-        _______,_______,_______,_______,_______,      _______,_______,_______,_______,_______,
-        OSM(KC_LGUI),OSM(KC_LALT),OSM(KC_LCTL),OSM(KC_LSFT),_______,_______,OSM(KC_RSFT),OSM(KC_RCTL),OSM(KC_LALT),OSM(KC_LGUI),
-        _______,_______,_______,_______,_______,      _______,_______,_______,_______,_______,
-                                _______,_______,      _______,_______
-    ),
-    [_SYM] = LAYOUT(
-        US_UNDS,US_LPRN,US_RPRN,CIR    ,_______,      US_BSLS,US_DLR ,US_PLUS,US_MINS,US_ASTR,
-        TIL    ,US_LABK,US_LCBR,US_AMPR,_______,      US_SLSH,US_QUES,US_RCBR,US_RABK,US_HASH,
-        _______,US_PERC,US_LBRC,_______,GRV    ,      _______,_______,US_RBRC,US_PIPE,_______,
-                                _______,_______,      _______,_______
-    ),
     [_GAME] = LAYOUT(
         KC_ESC ,US_1   ,US_2   ,US_3   ,US_4   ,      US_5   ,US_6   ,US_7   ,US_8   ,US_9   ,
         KC_TAB ,US_Q   ,US_W   ,US_E   ,US_R   ,      US_T   ,US_Y   ,US_U   ,US_I   ,US_O   ,
         KC_LSFT,US_A   ,US_S   ,US_D   ,US_F   ,      US_G   ,US_H   ,US_J   ,US_K   ,US_L   ,
-                                KC_LCTL,KC_SPACE,     CANCEL ,XXXXXXX
+                                KC_LCTL,KC_SPACE,     XXXXXXX,XXXXXXX
     ),
-    [_JAP1] = LAYOUT(
-            JP_RA     ,     JP_RU     ,     JP_KO     ,     JP_HA     ,     JP_YO     ,             JP_KI     ,     JP_NO     ,     JP_KU     ,     JP_A      ,     JP_RE     ,
-            JP_TA     ,     JP_TO     ,     JP_KA     ,     JP_TE     ,     JP_MO     ,             JP_WO     ,     JP_I      ,     JP_U      ,     JP_SI     ,     JP_N      ,
-            JP_MA     ,     JP_RI     ,     JP_NI     ,     JP_SA     ,     JP_NA     ,             JP_SU     ,     JP_TU     ,     KC_TAB    ,     XXXXXXX   ,     JP_S_TU   ,
-                                                KC_SPC         ,         MO(_JAP2)        ,            MO(_JAP3)       ,         KC_ENT
+    [_JP1] = LAYOUT(
+        JP_RA  ,JP_RU  ,JP_KO  ,JP_HA  ,JP_YO  ,      JP_KI  ,JP_NO  ,JP_KU  ,JP_A   ,JP_RE  ,
+        JP_TA  ,JP_TO  ,JP_KA  ,JP_TE  ,JP_MO  ,      JP_WO  ,JP_I   ,JP_U   ,JP_SI  ,JP_N   ,
+        JP_MA  ,JP_RI  ,JP_NI  ,JP_SA  ,JP_NA  ,      JP_SU  ,JP_TU  ,KC_TAB ,XXXXXXX,JP_S_TU,
+                                KC_SPC ,MO(_JP2),     MO(_JP3),KC_ENT
     ),
-    [_JAP2] = LAYOUT(
-            JP_HI     ,     JP_SO     ,     KC_BSPC   ,     JP_S_YA   ,     JP_HO     ,             JP_GI     ,     JP_GE     ,     JP_GU     ,    XXXXXXX    ,    XXXXXXX    ,
-            JP_NU     ,     JP_NE     ,     JP_S_YU   ,     JP_S_YO   ,     JP_HU     ,            XXXXXXX    ,     JP_DI     ,     JP_VU     ,     JP_ZI     ,    XXXXXXX    ,
-            JP_S_E    ,     JP_S_O    ,     JP_SE     ,     JP_YU     ,     JP_HE     ,             JP_ZU     ,     JP_DU     ,    TG(_JAP1)   ,    XXXXXXX    ,    XXXXXXX    ,
-                                                _______        ,         _______         ,           MO(_JAP4)         ,        _______
+    [_JP2] = LAYOUT(
+        JP_HI  ,JP_SO  ,KC_BSPC,JP_S_YA,JP_HO  ,      JP_GI  ,JP_GE  ,JP_GU  ,XXXXXXX,XXXXXXX,
+        JP_NU  ,JP_NE  ,JP_S_YU,JP_S_YO,JP_HU  ,      XXXXXXX,JP_DI  ,JP_VU  ,JP_ZI  ,XXXXXXX,
+        JP_S_E ,JP_S_O ,JP_SE  ,JP_YU  ,JP_HE  ,      JP_ZU  ,JP_DU  ,TG(_JP1),XXXXXXX,XXXXXXX,
+                                _______,_______,      MO(_JP4),_______
     ),
-    [_JAP3] = LAYOUT(
-            JP_BI     ,     JP_ZO     ,     JP_GO     ,     JP_BA     ,     JP_BO     ,             JP_E      ,     JP_KE     ,     JP_ME     ,     JP_MU     ,     JP_RO     ,
-            JP_DA     ,     JP_DO     ,     JP_GA     ,     JP_DE     ,     JP_BU     ,             JP_O      ,     JP_TI     ,     KC_PMNS   ,     JP_MI     ,     JP_YA     ,
-            JP_S_KA   ,     JP_S_KE   ,     JP_ZE     ,     JP_ZA     ,     JP_BE     ,             JP_WA     ,     JP_S_I    ,     JP_S_A    ,    XXXXXXX    ,    XXXXXXX    ,
-                                                 _______       ,         MO(_JAP4)        ,           _______         ,       _______
+    [_JP3] = LAYOUT(
+        JP_BI  ,JP_ZO  ,JP_GO  ,JP_BA  ,JP_BO  ,      JP_E   ,JP_KE  ,JP_ME  ,JP_MU  ,JP_RO  ,
+        JP_DA  ,JP_DO  ,JP_GA  ,JP_DE  ,JP_BU  ,      JP_O   ,JP_TI  ,KC_PMNS,JP_MI  ,JP_YA  ,
+        JP_S_KA,JP_S_KE,JP_ZE  ,JP_ZA  ,JP_BE  ,      JP_WA  ,JP_S_I ,JP_S_A ,XXXXXXX,XXXXXXX,
+                                _______,MO(_JP4),     _______,_______
     ),
 
-    [_JAP4] = LAYOUT(
-            JP_PI     ,    XXXXXXX    ,    XXXXXXX    ,     JP_PA     ,     JP_PO     ,            XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,
-           XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,     S(KC_SPC) ,     JP_PU     ,            XXXXXXX    ,    JP_MHEN    ,    XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,
-           XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,     XXXXXXX   ,     JP_PE     ,            XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,    XXXXXXX    ,
-                                                _______        ,         _______         ,           _______         ,         _______
+    [_JP4] = LAYOUT(
+        JP_PI  ,XXXXXXX,XXXXXXX,JP_PA  ,JP_PO  ,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+        XXXXXXX,XXXXXXX,XXXXXXX,S(KC_SPC),JP_PU,      XXXXXXX,JP_MHEN,XXXXXXX,XXXXXXX,XXXXXXX,
+        XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,JP_PE  ,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+                                _______,_______,      _______,_______
     )
 };
 
-#define UNDEAD(Key,DKey) case Key: if(record->event.pressed) {tap_code16(DKey);tap_code16(KC_SPACE);} return true;
+#define UNDEAD(Key,DKey) case Key: if(record->event.pressed) {tap_code16(DKey);tap_code16(KC_SPACE);} return false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record){
     switch (keycode) {
@@ -116,67 +100,52 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
         case AGRV:
             if(record->event.pressed)
                 { tap_code16(US_DGRV); tap_code16(US_A); }
-        return true;
+        return false;
         case EGRV:
             if(record->event.pressed)
                 { tap_code16(US_DGRV); tap_code16(US_E); }
-        return true;
+        return false;
         case ECIR:
             if(record->event.pressed)
                 { tap_code16(US_DCIR); tap_code16(US_E); }
-        return true;
-
-        // Disable numwords
-        case US_LPRN:
-        case US_RPRN:
-        case US_K:
-        case US_J:
-        case S(US_G):
-        case SPACE:
-        case KC_ENT:
-            if(record->event.pressed && get_highest_layer(layer_state)==_NUM)
-                layer_off(_NUM);
-            return true;
-        case CANCEL:
-            if (record->event.pressed)
-                layer_and(1);
         return false;
         case NEQL:
             if (record->event.pressed) {
                 tap_code16(US_EXLM);
                 tap_code16(US_EQL);
             }
-            return true;
+            return false;
         case GRT:
             if (record->event.pressed) {
                 tap_code16(US_LABK);
                 tap_code16(US_EQL);
             }
-            return true;
+            return false;
         case INF:
             if (record->event.pressed) {
                 tap_code16(US_RABK);
                 tap_code16(US_EQL);
             }
-            return true;
+            return false;
         case QU:
             if (record->event.pressed) {
                 tap_code16(US_Q);
                 tap_code16(US_U);
             }
-            return true;
+            return false;
         case AROW:
             if (record->event.pressed) {
                 tap_code16(US_MINS);
                 tap_code16(US_RABK);
             }
-            return true;
+            return false;
 
         case AT_U:
             if (record->event.pressed) {
                 tap_code16(US_AT);
                 tap_code16(US_U);
             }
+            return false;
 
 #ifndef DIRECT_KANA
         SS_KC(JP_A,"a")      SS_KC(JP_KA,"ka")	SS_KC(JP_SA,"sa")  SS_KC(JP_TA,"ta")  SS_KC(JP_NA,"na")	 SS_KC(JP_HA,"ha")	SS_KC(JP_MA,"ma")	SS_KC(JP_YA,"ya")	SS_KC(JP_RA,"ra")  SS_KC(JP_WA,"wa")
@@ -197,6 +166,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
         SS_KC(JP_S_E,"xe")   SS_KC(JP_S_KE,"xke")
         SS_KC(JP_S_O,"xo")                                                                                                                      SS_KC(JP_S_YO,"xyo")
 #else
+        TAP_CODE(JP_A,KC_3)      TAP_CODE(JP_KA,KC_T)	TAP_CODE(JP_SA,KC_X)  TAP_CODE(JP_TA,KC_Q)  TAP_CODE(JP_NA,KC_U)	 TAP_CODE(JP_HA,KC_F)	TAP_CODE(JP_MA,KC_J)	TAP_CODE(JP_YA,KC_7)	TAP_CODE(JP_RA,KC_O)    TAP_CODE(JP_WA,KC_0)
+        TAP_CODE(JP_I,KC_E)      TAP_CODE(JP_KI,KC_G)	TAP_CODE(JP_SI,KC_D)  TAP_CODE(JP_TI,KC_A)  TAP_CODE(JP_NI,KC_I)	 TAP_CODE(JP_HI,KC_V)	TAP_CODE(JP_MI,KC_N)	                        TAP_CODE(JP_RI,KC_L)    TAP_CODE(JP_WI,KC_NO)
+        TAP_CODE(JP_U,KC_4)      TAP_CODE(JP_KU,KC_H)	TAP_CODE(JP_SU,KC_R)  TAP_CODE(JP_TU,KC_Z)  TAP_CODE(JP_NU,KC_1)	 TAP_CODE(JP_HU,KC_2)	TAP_CODE(JP_MU,KC_NUHS)	TAP_CODE(JP_YU,KC_8)	TAP_CODE(JP_RU,KC_DOT)
+        TAP_CODE(JP_E,KC_5)      TAP_CODE(JP_KE,KC_HELP)TAP_CODE(JP_SE,KC_P)  TAP_CODE(JP_TE,KC_W)  TAP_CODE(JP_NE,KC_COMM)	 TAP_CODE(JP_HE,KC_EQL)	TAP_CODE(JP_ME,KC_SLSH)	                        TAP_CODE(JP_RE,KC_SCLN) TAP_CODE(JP_WE,KC_NO)
+        TAP_CODE(JP_O,KC_6)      TAP_CODE(JP_KO,KC_B)	TAP_CODE(JP_SO,KC_C)  TAP_CODE(JP_TO,KC_S)  TAP_CODE(JP_NO,KC_K)	 TAP_CODE(JP_HO,KC_MINS)TAP_CODE(JP_MO,KC_M)	TAP_CODE(JP_YO,KC_9)	TAP_CODE(JP_RO,KC_INT1) TAP_CODE(JP_WO,OSM(KC_LSFT))  TAP_CODE(JP_N,KC_Y)
 
                                             TAP_CODES(JP_GA, JP_KA  , KC_LBRC)     TAP_CODES(JP_ZA, JP_SA, KC_LBRC)     TAP_CODES(JP_DA, JP_TA, KC_LBRC)     TAP_CODES(JP_BA, JP_HA, KC_LBRC)     TAP_CODES(JP_PA, JP_HA, KC_RBRC)
                                             TAP_CODES(JP_GI, JP_KI  , KC_LBRC)     TAP_CODES(JP_ZI, JP_SI, KC_LBRC)     TAP_CODES(JP_DI, JP_TI, KC_LBRC)     TAP_CODES(JP_BI, JP_HI, KC_LBRC)     TAP_CODES(JP_PI, JP_HI, KC_RBRC)
@@ -212,29 +186,36 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
         case JP_S_YA:
         case JP_S_YU:
         case JP_S_YO:
-        case JP_WO:
-            if(record->event.pressed)
-               tap_code16(OSM(KC_LSFT));
-            return true;
-        case JP_KE:
-            if(record->event.pressed)
-                tap_code16(KC_QUOT);
-            return false;
         case JP_S_WA:
             if(record->event.pressed) {
                 tap_code16(OSM(KC_LSFT));
                 tap_code16(KC_0);
             }
+            return false;
+
 #endif
         default:
             return true;
     }
 }
+/*
+ -enum japanese_keycodes_ {
+-    JP_A=KC_3,  JP_KA=KC_T   ,	JP_SA=KC_X,	JP_TA=KC_Q,	JP_NA=KC_U   ,	JP_HA=KC_F   ,	JP_MA=KC_J   ,	JP_YA=KC_7,	JP_RA=KC_O   ,  JP_WA=KC_0,
+-    JP_I=KC_E,  JP_KI=KC_G   ,	JP_SI=KC_D,	JP_TI=KC_A,	JP_NI=KC_I   ,	JP_HI=KC_V   ,	JP_MI=KC_N   ,	            JP_RI=KC_L   ,  JP_WI=KC_NO,
+-    JP_U=KC_4,  JP_KU=KC_H   ,	JP_SU=KC_R,	JP_TU=KC_Z,	JP_NU=KC_1   ,	JP_HU=KC_2   ,	JP_MU=KC_NUHS,	JP_YU=KC_8,	JP_RU=KC_DOT ,
+-    JP_E=KC_5,  JP_KE=KC_HELP,	JP_SE=KC_P,	JP_TE=KC_W,	JP_NE=KC_COMM,	JP_HE=KC_EQL ,	JP_ME=KC_SLSH,              JP_RE=KC_SCLN,  JP_WE=KC_NO,
+-    JP_O=KC_6,  JP_KO=KC_B   ,	JP_SO=KC_C,	JP_TO=KC_S,	JP_NO=KC_K   ,	JP_HO=KC_MINS,	JP_MO=KC_M   ,	JP_YO=KC_9,	JP_RO=KC_INT1,  JP_WO=KC_0,  JP_N=KC_Y,
+-
+-    JP_S_A=KC_3,  JP_S_KA=KC_NO,                                                                     JP_S_YA=KC_7,
+-    JP_S_I=KC_E,
+-    JP_S_U=KC_4,                            JP_S_TU=KC_Z,                                            JP_S_YU=KC_8,
+-    JP_S_E=KC_5,  JP_S_KE=KC_NO,
+-    JP_S_O=KC_6,                                                                                     JP_S_YO=KC_9,
 
+*/
 uint16_t get_combo_term(uint16_t combo_index, combo_t* combo){
     switch (combo->keycode) {
         case CW_TOGG:
-        case NUMW:
         case KC_LCTL:
             return 50;
     }
