@@ -27,9 +27,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 _______,_______,     _______,_______
     ),
     [_SHRT] = LAYOUT(
-        C(US_E),US_S,   US_R,   US_G,   _______,      _______,  NAV  ,_______,_______,_______,
+        C(US_E),US_S,   US_R,   US_G,   _______,      _______,US_EURO,US_YEN ,_______,_______,
         C(US_X),C(US_C),C(US_S),C(US_V),C(US_Z),      US_DGRV,US_DIAE,US_DCIR,US_ACUT,US_DTIL,
-        C(US_B),C(US_W),C(US_D),C(US_R),S(KC_F1),     KC_PSCR,  GAME ,US_CURR,  JAP  ,_______,
+        C(US_B),C(US_W),C(US_D),C(US_R),S(KC_F1),     KC_PSCR,  GAME ,  NAV  ,  JAP  ,_______,
                                 SHRT,   _______,      KC_SPACE,MO(_FUN)
     ),
     [_NAV] = LAYOUT(
