@@ -1,6 +1,9 @@
 #include <stdint.h>
 
+#include "action.h"
+#include "action_util.h"
 #include "keycodes.h"
+#include "modifiers.h"
 
 #include QMK_KEYBOARD_H
 
@@ -33,7 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,_______,_______,_______,_______,     KC_PGUP,KC_HOME,_______,KC_END ,_______ ,
         KC_LGUI,KC_LALT,KC_LCTL,KC_LSFT,_______,     KC_PGDN,KC_LEFT,KC_DOWN,KC_UP  ,KC_RIGHT,
         _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______ ,
-                                _______,MO(_WNAV),   _______,_______
+                                _______,MO(_WNAV),   TG(_NAV),_______
     ),
     [_WNAV] = LAYOUT(
         _______,_______,_______,G(US_8),_______,      _______,G(US_9),_______,_______,_______,
@@ -98,17 +101,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
         UNDEAD(DQUOT, S(US_ACUT))
 
         case AGRV:
-            if(record->event.pressed)
-                { tap_code16(US_DGRV); tap_code16(US_A); }
-        return false;
+            if(record->event.pressed){
+                uint8_t mods = get_mods();
+                unregister_mods(MOD_MASK_SHIFT);
+
+                tap_code16(US_DGRV);
+                if(mods & MOD_MASK_SHIFT)
+                    set_mods(mods);
+
+                tap_code16(US_A);
+            }
+            return false;
         case EGRV:
-            if(record->event.pressed)
-                { tap_code16(US_DGRV); tap_code16(US_E); }
-        return false;
+            if(record->event.pressed){
+                uint8_t mods = get_mods();
+                unregister_mods(MOD_MASK_SHIFT);
+
+                tap_code16(US_DGRV);
+                if(mods & MOD_MASK_SHIFT)
+                    set_mods(mods);
+
+                tap_code16(US_E);
+            }
+            return false;
         case ECIR:
             if(record->event.pressed)
                 { tap_code16(US_DCIR); tap_code16(US_E); }
-        return false;
+            return false;
         case NEQL:
             if (record->event.pressed) {
                 tap_code16(US_EXLM);
