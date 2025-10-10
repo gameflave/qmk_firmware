@@ -2,6 +2,8 @@
 
 #include "action.h"
 #include "action_util.h"
+#include "host.h"
+#include "keyboard.h"
 #include "keycodes.h"
 #include "modifiers.h"
 
@@ -15,7 +17,7 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
-        AGRV   ,EGRV   ,US_EACU,US_B   ,QK_REP ,      US_F    ,US_D    ,US_L   ,QUOT   ,US_X,
+        AGRV   ,EGRV   ,US_EACU,US_B   ,US_Q   ,      US_F    ,US_D    ,US_L   ,QUOT   ,US_X,
         US_A   ,US_I   ,US_O   ,US_U   ,US_COMM,      US_P    ,US_T    ,US_S   ,US_R   ,US_N,
         US_K   ,US_Y   ,US_J   ,US_DOT ,US_W   ,      US_G    ,US_C    ,US_M   ,US_H   ,US_V,
                                 SHRT   ,US_E   ,      SPACE   ,MO(_NUM)
@@ -45,10 +47,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 _______,XXXXXXX,      _______,_______
     ),
     [_NUM] = LAYOUT(
-        US_UNDS,US_LPRN,US_RPRN,US_8   ,AT_U   ,      _______,US_9   ,KC_PPLS,KC_PMNS,KC_PAST,
-        US_6   ,US_4   ,US_0   ,US_2   ,US_COMM,      KC_PSLS,US_3   ,US_1   ,US_5   ,US_7   ,
-        US_K   ,S(US_G),US_J   ,US_DOT ,XXXXXXX,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
-                                XXXXXXX,XXXXXXX,      SPACE  ,XXXXXXX
+        US_UNDS,US_LPRN,US_RPRN,US_8   ,_______,      _______,US_9   ,KC_PPLS,KC_PMNS,KC_PAST,
+        US_6   ,US_4   ,US_0   ,US_2   ,_______,      KC_PSLS,US_3   ,US_1   ,US_5   ,US_7   ,
+        _______,XXXXXXX,_______,_______,XXXXXXX,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+                              XXXXXXX,MO(_NUMP),      SPACE  ,XXXXXXX
+    ),
+    [_NUMP] = LAYOUT(
+        _______,_______,_______,KC_KP_8,_______,     _______,KC_KP_9,_______,_______,_______,
+        KC_KP_6,KC_KP_4,KC_KP_0,KC_KP_2,_______,     _______,KC_KP_3,KC_KP_1,KC_KP_5,KC_KP_7,
+        _______,_______,_______,KC_PDOT,_______,     _______,_______,_______,_______,_______,
+                                _______,_______,     _______,_______
     ),
     [_FUN] = LAYOUT(
         _______,_______,_______,KC_F8  ,_______,      _______,KC_F9  ,_______,_______,_______,
@@ -60,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC ,US_1   ,US_2   ,US_3   ,US_4   ,      US_5   ,US_6   ,US_7   ,US_8   ,US_9   ,
         KC_TAB ,US_Q   ,US_W   ,US_E   ,US_R   ,      US_T   ,US_Y   ,US_U   ,US_I   ,US_O   ,
         KC_LSFT,US_A   ,US_S   ,US_D   ,US_F   ,      US_G   ,US_H   ,US_J   ,US_K   ,US_L   ,
-                                KC_LCTL,KC_SPACE,     XXXXXXX,XXXXXXX
+                                KC_LCTL,KC_SPACE,     TG(_GAME),XXXXXXX
     ),
     [_JP1] = LAYOUT(
         JP_RA  ,JP_RU  ,JP_KO  ,JP_HA  ,JP_YO  ,      JP_KI  ,JP_NO  ,JP_KU  ,JP_A   ,JP_RE  ,
@@ -250,6 +258,11 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             combo_enable();
         }
     return state;
+}
+
+void keyboard_post_init_user() {
+    if(!host_keyboard_led_state().num_lock)
+        tap_code(KC_NUM_LOCK);
 }
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
