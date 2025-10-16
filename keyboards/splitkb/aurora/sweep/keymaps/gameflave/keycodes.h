@@ -7,19 +7,19 @@
 #include "keymap_us_international.h"
 
 enum layers_ {
-    _BASE,
-    _BSYM,
-    _SHRT,
-    _NAV,
-    _WNAV,
-    _GAME,
-    _JP1,
-    _JP2,
-    _JP3,
-    _JP4,
-    _NUM,
-    _NUMP,
-    _FUN,
+    _BASE,	// White
+    _BSYM,	// Green
+    _SHRT,	// Green
+    _NAV,	// Purple
+    _WNAV,	// Purple
+    _GAME,	// Red
+    _JP1,	// Blue
+    _JP2,	//
+    _JP3,	//
+    _JP4,	//
+    _NUM,	// Yellow
+    _NUMP,	//
+    _FUN,	//
 };
 
 enum custom_keycodes_ {
