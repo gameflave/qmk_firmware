@@ -2,10 +2,12 @@
 
 #include "action.h"
 #include "action_util.h"
+#include "color.h"
 #include "host.h"
 #include "keyboard.h"
 #include "keycodes.h"
 #include "modifiers.h"
+#include "rgblight.h"
 
 #include QMK_KEYBOARD_H
 
@@ -29,9 +31,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 _______,_______,     _______,_______
     ),
     [_SHRT] = LAYOUT(
-        C(US_E),US_S,   US_R,   US_G,   _______,      _______,US_EURO,US_YEN ,_______,_______,
+        _______,_______,_______,_______,_______,      _______,US_EURO,US_YEN ,_______,_______,
         C(US_X),C(US_C),C(US_S),C(US_V),C(US_Z),      US_DGRV,US_DIAE,US_DCIR,US_ACUT,US_DTIL,
-        C(US_B),C(US_W),C(US_D),C(US_R),S(KC_F1),     KC_PSCR,  GAME ,  NAV  ,  JAP  ,_______,
+        _______,_______,_______,_______,S(KC_F1),     KC_PSCR,  GAME ,  NAV  ,  JAP  ,_______,
                                 SHRT,   _______,      KC_SPACE,MO(_FUN)
     ),
     [_NAV] = LAYOUT(
@@ -49,8 +51,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NUM] = LAYOUT(
         US_UNDS,US_LPRN,US_RPRN,US_8   ,_______,      _______,US_9   ,KC_PPLS,KC_PMNS,KC_PAST,
         US_6   ,US_4   ,US_0   ,US_2   ,_______,      KC_PSLS,US_3   ,US_1   ,US_5   ,US_7   ,
-        _______,XXXXXXX,_______,_______,XXXXXXX,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
-                              XXXXXXX,MO(_NUMP),      SPACE  ,XXXXXXX
+        _______,_______,_______,_______,_______,      _______,_______,_______,_______,_______,
+                              XXXXXXX,MO(_NUMP),      _______,XXXXXXX
     ),
     [_NUMP] = LAYOUT(
         _______,_______,_______,KC_KP_8,_______,     _______,KC_KP_9,_______,_______,_______,
@@ -264,30 +266,129 @@ void keyboard_post_init_user() {
     if(!host_keyboard_led_state().num_lock)
         tap_code(KC_NUM_LOCK);
 }
+/*
+    ******        Led Map      *****
+    *    00-01-02        42-41-40
+    *
+    *    03-04-05        45-44-43
+    ******                     *****
+    * 06-07-08-09-10  27-26-25-24-23
+    * 11-12-13-14-15  32-31-30-29-28
+    * 16-17-18-19-20  37-36-35-34-33
+    *          21-22  39-38
+*/
+
+#define HSV_SHRT  22,240,204
+#define HSV_NUM  108,240,204
+#define HSV_PNUM  92,240,204
+#define HSV_BSYM 148,240,204
+#define HSV_GAME   0,240,204
+#define HSV_NAV    0,240,204
+#define HSV_WNAV   0,240,204
+#define HSV_JAP    0,240,204
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if(!is_keyboard_master())
+        return;
+
     rgblight_sethsv_range(HSV_WHITE,0,45);
+    rgblight_sethsv_at(HSV_SHRT,21);
+    rgblight_sethsv_at(HSV_NUM,38);
+
     switch(get_highest_layer(layer_state)) {
-    case _BSYM:
-        rgblight_sethsv_range(HSV_BLUE,6,9);
-        break;
-    case _SHRT:
-        rgblight_sethsv_range(HSV_GREEN,6,10);
-        rgblight_sethsv_range(HSV_GREEN,11,21);
-        rgblight_sethsv_range(HSV_GREEN,23,26);
-        rgblight_sethsv_range(HSV_GREEN,28,37);
-        rgblight_sethsv_at(HSV_GREEN,38);
-        rgblight_sethsv_at(HSV_GREEN,40);
-        break;
-    case _NUM:
-        rgblight_sethsv_at(HSV_GOLDENROD,6);
-        rgblight_sethsv_range(HSV_CHARTREUSE,7,9);
-        rgblight_sethsv_at(HSV_GOLDENROD,9);
-        rgblight_sethsv_range(HSV_GOLDENROD,11,16);
-        rgblight_sethsv_range(HSV_CHARTREUSE,16,19);
-        rgblight_sethsv_at(HSV_GOLDENROD,19);
-        rgblight_sethsv_range(HSV_BLACK,20,22);
+        case _BSYM:
+        rgblight_sethsv_range(HSV_BSYM,6,9);
         break;
 
+        case _SHRT:
+        //Backlights
+        rgblight_sethsv_range(HSV_SHRT, 0, 6);
+        rgblight_sethsv_range(HSV_SHRT, 39, 45);
+
+        rgblight_sethsv_range(HSV_SHRT,11,16);
+        rgblight_sethsv_at(HSV_SHRT,20);
+
+        rgblight_sethsv_range(HSV_SHRT,25,27);
+        rgblight_sethsv_range(HSV_SHRT,28,33);
+        rgblight_sethsv_at(HSV_SHRT,37);
+
+        rgblight_sethsv_at(HSV_GAME,36);
+        rgblight_sethsv_at(HSV_NAV,35);
+        rgblight_sethsv_at(HSV_JAP,34);
+        break;
+
+        case _NUM:
+        //Backlights
+        rgblight_sethsv_range(HSV_NUM, 0, 6);
+        rgblight_sethsv_range(HSV_NUM, 39, 45);
+        //Numbers
+        rgblight_sethsv_range(HSV_NUM,11,15);
+        rgblight_sethsv_at(HSV_NUM,9);
+        //Symbols
+        rgblight_sethsv_range(HSV_BSYM,6,9);
+        // rgblight_sethsv_range(HSV_CHARTREUSE,16,19);
+        rgblight_sethsv_at(HSV_PNUM,22);
+        break;
+
+        case _NUMP:
+        //Backlights
+        rgblight_sethsv_range(HSV_PNUM, 0, 6);
+        rgblight_sethsv_range(HSV_PNUM, 39, 45);
+        //Numbers
+        rgblight_sethsv_range(HSV_PNUM,11,15);
+        rgblight_sethsv_at(HSV_PNUM,9);
+        //Symbols
+        rgblight_sethsv_range(HSV_BSYM,6,9);
+
+        break;
+
+        case _NAV:
+        //Backlights
+        rgblight_sethsv_range(HSV_PURPLE, 0, 6);
+        rgblight_sethsv_range(HSV_PURPLE, 39, 45);
+
+        rgblight_sethsv_range(HSV_PURPLE,11,15);
+        break;
+
+        case _WNAV:
+        break;
+
+        case _FUN:
+        break;
+
+        case _GAME:
+        //Backlights
+        rgblight_sethsv_range(HSV_RED, 0, 6);
+        rgblight_sethsv_range(HSV_RED, 39, 45);
+
+        break;
+
+        case _JP1:
+        //Backlights
+        rgblight_sethsv_range(HSV_BLUE, 0, 6);
+        rgblight_sethsv_range(HSV_BLUE, 39, 45);
+
+        break;
+
+        case _JP2:
+        //Backlights
+        rgblight_sethsv_range(HSV_BLUE, 0, 6);
+        rgblight_sethsv_range(HSV_BLUE, 39, 45);
+
+        break;
+
+        case _JP3:
+        //Backlights
+        rgblight_sethsv_range(HSV_BLUE, 0, 6);
+        rgblight_sethsv_range(HSV_BLUE, 39, 45);
+
+        break;
+
+        case _JP4:
+        //Backlights
+        rgblight_sethsv_range(HSV_BLUE, 0, 6);
+        rgblight_sethsv_range(HSV_BLUE, 39, 45);
+
+        break;
     }
 }
