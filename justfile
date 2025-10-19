@@ -1,2 +1,2 @@
 compile:
-    qmk compile -kb splitkb/aurora/sweep/rev1 -km gameflave
+    qmk flash -kb splitkb/aurora/sweep/rev1 -km gameflave
