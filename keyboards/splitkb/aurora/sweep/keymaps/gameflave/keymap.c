@@ -265,6 +265,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 void keyboard_post_init_user() {
     if(!host_keyboard_led_state().num_lock)
         tap_code(KC_NUM_LOCK);
+    rgblight_enable_noeeprom();
+    rgblight_sethsv_noeeprom(HSV_GREEN);
 }
 /*
     ******        Led Map      *****
@@ -288,107 +290,107 @@ void keyboard_post_init_user() {
 #define HSV_JAP    0,240,204
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if(!is_keyboard_master())
-        return;
+    // if(!is_keyboard_master())
+    //     return;
 
     rgblight_sethsv_range(HSV_WHITE,0,45);
     rgblight_sethsv_at(HSV_SHRT,21);
     rgblight_sethsv_at(HSV_NUM,38);
 
-    switch(get_highest_layer(layer_state)) {
-        case _BSYM:
-        rgblight_sethsv_range(HSV_BSYM,6,9);
-        break;
-
-        case _SHRT:
-        //Backlights
-        rgblight_sethsv_range(HSV_SHRT, 0, 6);
-        rgblight_sethsv_range(HSV_SHRT, 39, 45);
-
-        rgblight_sethsv_range(HSV_SHRT,11,16);
-        rgblight_sethsv_at(HSV_SHRT,20);
-
-        rgblight_sethsv_range(HSV_SHRT,25,27);
-        rgblight_sethsv_range(HSV_SHRT,28,33);
-        rgblight_sethsv_at(HSV_SHRT,37);
-
-        rgblight_sethsv_at(HSV_GAME,36);
-        rgblight_sethsv_at(HSV_NAV,35);
-        rgblight_sethsv_at(HSV_JAP,34);
-        break;
-
-        case _NUM:
-        //Backlights
-        rgblight_sethsv_range(HSV_NUM, 0, 6);
-        rgblight_sethsv_range(HSV_NUM, 39, 45);
-        //Numbers
-        rgblight_sethsv_range(HSV_NUM,11,15);
-        rgblight_sethsv_at(HSV_NUM,9);
-        //Symbols
-        rgblight_sethsv_range(HSV_BSYM,6,9);
-        // rgblight_sethsv_range(HSV_CHARTREUSE,16,19);
-        rgblight_sethsv_at(HSV_PNUM,22);
-        break;
-
-        case _NUMP:
-        //Backlights
-        rgblight_sethsv_range(HSV_PNUM, 0, 6);
-        rgblight_sethsv_range(HSV_PNUM, 39, 45);
-        //Numbers
-        rgblight_sethsv_range(HSV_PNUM,11,15);
-        rgblight_sethsv_at(HSV_PNUM,9);
-        //Symbols
-        rgblight_sethsv_range(HSV_BSYM,6,9);
-
-        break;
-
-        case _NAV:
-        //Backlights
-        rgblight_sethsv_range(HSV_PURPLE, 0, 6);
-        rgblight_sethsv_range(HSV_PURPLE, 39, 45);
-
-        rgblight_sethsv_range(HSV_PURPLE,11,15);
-        break;
-
-        case _WNAV:
-        break;
-
-        case _FUN:
-        break;
-
-        case _GAME:
-        //Backlights
-        rgblight_sethsv_range(HSV_RED, 0, 6);
-        rgblight_sethsv_range(HSV_RED, 39, 45);
-
-        break;
-
-        case _JP1:
-        //Backlights
-        rgblight_sethsv_range(HSV_BLUE, 0, 6);
-        rgblight_sethsv_range(HSV_BLUE, 39, 45);
-
-        break;
-
-        case _JP2:
-        //Backlights
-        rgblight_sethsv_range(HSV_BLUE, 0, 6);
-        rgblight_sethsv_range(HSV_BLUE, 39, 45);
-
-        break;
-
-        case _JP3:
-        //Backlights
-        rgblight_sethsv_range(HSV_BLUE, 0, 6);
-        rgblight_sethsv_range(HSV_BLUE, 39, 45);
-
-        break;
-
-        case _JP4:
-        //Backlights
-        rgblight_sethsv_range(HSV_BLUE, 0, 6);
-        rgblight_sethsv_range(HSV_BLUE, 39, 45);
-
-        break;
-    }
+    // switch(get_highest_layer(layer_state)) {
+    //     case _BSYM:
+    //     rgblight_sethsv_range(HSV_BSYM,6,9);
+    //     break;
+    //
+    //     case _SHRT:
+    //     //Backlights
+    //     rgblight_sethsv_range(HSV_SHRT, 0, 6);
+    //     rgblight_sethsv_range(HSV_SHRT, 39, 45);
+    //
+    //     rgblight_sethsv_range(HSV_SHRT,11,16);
+    //     rgblight_sethsv_at(HSV_SHRT,20);
+    //
+    //     rgblight_sethsv_range(HSV_SHRT,25,27);
+    //     rgblight_sethsv_range(HSV_SHRT,28,33);
+    //     rgblight_sethsv_at(HSV_SHRT,37);
+    //
+    //     rgblight_sethsv_at(HSV_GAME,36);
+    //     rgblight_sethsv_at(HSV_NAV,35);
+    //     rgblight_sethsv_at(HSV_JAP,34);
+    //     break;
+    //
+    //     case _NUM:
+    //     //Backlights
+    //     rgblight_sethsv_range(HSV_NUM, 0, 6);
+    //     rgblight_sethsv_range(HSV_NUM, 39, 45);
+    //     //Numbers
+    //     rgblight_sethsv_range(HSV_NUM,11,15);
+    //     rgblight_sethsv_at(HSV_NUM,9);
+    //     //Symbols
+    //     rgblight_sethsv_range(HSV_BSYM,6,9);
+    //     // rgblight_sethsv_range(HSV_CHARTREUSE,16,19);
+    //     rgblight_sethsv_at(HSV_PNUM,22);
+    //     break;
+    //
+    //     case _NUMP:
+    //     //Backlights
+    //     rgblight_sethsv_range(HSV_PNUM, 0, 6);
+    //     rgblight_sethsv_range(HSV_PNUM, 39, 45);
+    //     //Numbers
+    //     rgblight_sethsv_range(HSV_PNUM,11,15);
+    //     rgblight_sethsv_at(HSV_PNUM,9);
+    //     //Symbols
+    //     rgblight_sethsv_range(HSV_BSYM,6,9);
+    //
+    //     break;
+    //
+    //     case _NAV:
+    //     //Backlights
+    //     rgblight_sethsv_range(HSV_PURPLE, 0, 6);
+    //     rgblight_sethsv_range(HSV_PURPLE, 39, 45);
+    //
+    //     rgblight_sethsv_range(HSV_PURPLE,11,15);
+    //     break;
+    //
+    //     case _WNAV:
+    //     break;
+    //
+    //     case _FUN:
+    //     break;
+    //
+    //     case _GAME:
+    //     //Backlights
+    //     rgblight_sethsv_range(HSV_RED, 0, 6);
+    //     rgblight_sethsv_range(HSV_RED, 39, 45);
+    //
+    //     break;
+    //
+    //     case _JP1:
+    //     //Backlights
+    //     rgblight_sethsv_range(HSV_BLUE, 0, 6);
+    //     rgblight_sethsv_range(HSV_BLUE, 39, 45);
+    //
+    //     break;
+    //
+    //     case _JP2:
+    //     //Backlights
+    //     rgblight_sethsv_range(HSV_BLUE, 0, 6);
+    //     rgblight_sethsv_range(HSV_BLUE, 39, 45);
+    //
+    //     break;
+    //
+    //     case _JP3:
+    //     //Backlights
+    //     rgblight_sethsv_range(HSV_BLUE, 0, 6);
+    //     rgblight_sethsv_range(HSV_BLUE, 39, 45);
+    //
+    //     break;
+    //
+    //     case _JP4:
+    //     //Backlights
+    //     rgblight_sethsv_range(HSV_BLUE, 0, 6);
+    //     rgblight_sethsv_range(HSV_BLUE, 39, 45);
+    //
+    //     break;
+    // }
 }
