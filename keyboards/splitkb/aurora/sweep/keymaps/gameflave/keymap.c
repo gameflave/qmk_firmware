@@ -270,14 +270,14 @@ void keyboard_post_init_user() {
 }
 /*
     ******        Led Map      *****
-    *    00-01-02        42-41-40
+    *    00-01-02        25-24-23
     *
-    *    03-04-05        45-44-43
+    *    03-04-05        28-27-26
     ******                     *****
-    * 06-07-08-09-10  27-26-25-24-23
-    * 11-12-13-14-15  32-31-30-29-28
-    * 16-17-18-19-20  37-36-35-34-33
-    *          21-22  39-38
+    * 06-07-08-09-10  29-30-31-32-33
+    * 11-12-13-14-15  34-35-36-37-38
+    * 16-17-18-19-20  39-40-41-42-43
+    *          21-22  44-45
 */
 
 #define HSV_SHRT  22,240,204
@@ -290,12 +290,10 @@ void keyboard_post_init_user() {
 #define HSV_JAP    0,240,204
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // if(!is_keyboard_master())
-    //     return;
 
-    rgblight_sethsv_range(HSV_WHITE,0,45);
+    rgblight_sethsv_range(HSV_WHITE,0,46);
     rgblight_sethsv_at(HSV_SHRT,21);
-    rgblight_sethsv_at(HSV_NUM,38);
+    rgblight_sethsv_at(HSV_NUM,45);
 
     // switch(get_highest_layer(layer_state)) {
     //     case _BSYM:
