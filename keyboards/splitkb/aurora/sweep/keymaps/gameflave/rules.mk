@@ -3,7 +3,9 @@ CONVERT_TO = liatris
 
 VPATH += keyboards/gboards/
 
+CONSOLE_ENABLE = yes
 SPLIT_KEYBOARD = yes
+
 COMBO_ENABLE = yes
 CAPS_WORD_ENABLE = yes
 SEND_STRING_ENABLE = yes
