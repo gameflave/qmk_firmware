@@ -1,14 +1,15 @@
 #include <stdint.h>
 
 #include "action.h"
+#include "action_layer.h"
 #include "action_util.h"
 #include "color.h"
 #include "debug.h"
 #include "host.h"
+#include "info_config.h"
 #include "keyboard.h"
 #include "keycodes.h"
 #include "modifiers.h"
-#include "rgblight.h"
 #include "print.h"
 
 #include QMK_KEYBOARD_H
@@ -23,11 +24,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
         AGRV   ,EGRV   ,US_EACU,US_B   ,US_Q   ,      US_F    ,US_D    ,US_L   ,QUOT   ,US_X,
         US_A   ,US_I   ,US_O   ,US_U   ,US_COMM,      US_P    ,US_T    ,US_S   ,US_R   ,US_N,
-        US_K   ,US_Y   ,US_J   ,US_DOT ,US_W   ,      US_G    ,US_C    ,US_M   ,US_H   ,US_V,
+        US_K   ,US_Y   ,US_J ,US_DOT ,US_W   ,      US_G    ,US_C    ,US_M   ,US_H   ,US_V,
                                 SHRT   ,US_E   ,      SPACE   ,MO(_NUM)
     ),
     [_BSYM] = LAYOUT(
-        US_UNDS,US_LPRN,US_RPRN,_______,_______,     _______,_______,_______,_______,_______,
+        US_UNDS,US_LPRN,US_RPRN,_______,_______,     _______,RM_TOGG,RM_HUED,RM_NEXT,RM_SPDU,
         _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______,
         _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______,
                                 _______,_______,     _______,_______
@@ -229,21 +230,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
             return true;
     }
 }
-/*
- -enum japanese_keycodes_ {
--    JP_A=KC_3,  JP_KA=KC_T   ,	JP_SA=KC_X,	JP_TA=KC_Q,	JP_NA=KC_U   ,	JP_HA=KC_F   ,	JP_MA=KC_J   ,	JP_YA=KC_7,	JP_RA=KC_O   ,  JP_WA=KC_0,
--    JP_I=KC_E,  JP_KI=KC_G   ,	JP_SI=KC_D,	JP_TI=KC_A,	JP_NI=KC_I   ,	JP_HI=KC_V   ,	JP_MI=KC_N   ,	            JP_RI=KC_L   ,  JP_WI=KC_NO,
--    JP_U=KC_4,  JP_KU=KC_H   ,	JP_SU=KC_R,	JP_TU=KC_Z,	JP_NU=KC_1   ,	JP_HU=KC_2   ,	JP_MU=KC_NUHS,	JP_YU=KC_8,	JP_RU=KC_DOT ,
--    JP_E=KC_5,  JP_KE=KC_HELP,	JP_SE=KC_P,	JP_TE=KC_W,	JP_NE=KC_COMM,	JP_HE=KC_EQL ,	JP_ME=KC_SLSH,              JP_RE=KC_SCLN,  JP_WE=KC_NO,
--    JP_O=KC_6,  JP_KO=KC_B   ,	JP_SO=KC_C,	JP_TO=KC_S,	JP_NO=KC_K   ,	JP_HO=KC_MINS,	JP_MO=KC_M   ,	JP_YO=KC_9,	JP_RO=KC_INT1,  JP_WO=KC_0,  JP_N=KC_Y,
--
--    JP_S_A=KC_3,  JP_S_KA=KC_NO,                                                                     JP_S_YA=KC_7,
--    JP_S_I=KC_E,
--    JP_S_U=KC_4,                            JP_S_TU=KC_Z,                                            JP_S_YU=KC_8,
--    JP_S_E=KC_5,  JP_S_KE=KC_NO,
--    JP_S_O=KC_6,                                                                                     JP_S_YO=KC_9,
 
-*/
 uint16_t get_combo_term(uint16_t combo_index, combo_t* combo){
     switch (combo->keycode) {
         case CW_TOGG:
@@ -267,133 +254,60 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 void keyboard_post_init_user() {
     if(!host_keyboard_led_state().num_lock)
         tap_code(KC_NUM_LOCK);
-
-    rgblight_enable();
-    rgblight_sethsv_noeeprom(HSV_TEAL);
-    rgblight_sethsv_range(HSV_GREEN,0,23);
-    rgblight_sethsv_range(HSV_BLUE,23,46);
 }
-/*
-    ******        Led Map      *****
-    *    00-01-02        25-24-23
-    *
-    *    03-04-05        28-27-26
-    ******                     *****
-    * 06-07-08-09-10  29-30-31-32-33
-    * 11-12-13-14-15  34-35-36-37-38
-    * 16-17-18-19-20  39-40-41-42-43
-    *          21-22  44-45
-*/
 
-#define HSV_SHRT  22,240,204
-#define HSV_NUM  108,240,204
-#define HSV_PNUM  92,240,204
-#define HSV_BSYM 148,240,204
-#define HSV_GAME   0,240,204
-#define HSV_NAV    0,240,204
-#define HSV_WNAV   0,240,204
-#define HSV_JAP    0,240,204
+uint8_t led_map[] = {
+     0, 1, 2,        25,24,23,
+     3, 4, 5,        28,27,26,
 
-void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
-uprintf("keycode: %u pressed: %d\n", keycode, record->event.pressed);
-    rgblight_sethsv_range(HSV_WHITE,0,46);
-    rgblight_sethsv_at(HSV_SHRT,21);
-    rgblight_sethsv_at(HSV_NUM,45);
+  6, 7, 8, 9,10,  29,30,31,32,33,
+ 11,12,13,14,15,  34,35,36,37,38,
+ 16,17,18,19,20,  39,40,41,42,43,
+          21,22,  44,45,
+};
 
-    switch(get_highest_layer(layer_state)) {
-        case _BSYM:
-        rgblight_sethsv_range(HSV_BSYM,6,9);
-        break;
+enum Colors_ {
+    RED,
+    GREEN,
+    WHITE,
+};
+uint8_t Colors[] = {
+    100, 10, 10,
+    10, 100, 10,
+    100,100,100,
+};
 
-        case _SHRT:
-        //Backlights
-        rgblight_sethsv_range(HSV_SHRT, 0, 6);
-        rgblight_sethsv_range(HSV_SHRT, 39, 45);
+enum Colors_ led_base[RGB_MATRIX_LED_COUNT] = {
+RED,RED,RED,RED,RED,RED,
+RED,RED,RED,RED,RED,RED,
+WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,
+WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,
+WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,
+RED,RED,RED,RED,
+};
+enum Colors_ led_shrt[RGB_MATRIX_LED_COUNT] = {
+WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,
+WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,
+GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,
+GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,
+GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,
+WHITE,WHITE,WHITE,WHITE,
+};
 
-        rgblight_sethsv_range(HSV_SHRT,11,16);
-        rgblight_sethsv_at(HSV_SHRT,20);
-
-        rgblight_sethsv_range(HSV_SHRT,25,27);
-        rgblight_sethsv_range(HSV_SHRT,28,33);
-        rgblight_sethsv_at(HSV_SHRT,37);
-
-        rgblight_sethsv_at(HSV_GAME,36);
-        rgblight_sethsv_at(HSV_NAV,35);
-        rgblight_sethsv_at(HSV_JAP,34);
-        break;
-
-        case _NUM:
-        //Backlights
-        rgblight_sethsv_range(HSV_NUM, 0, 6);
-        rgblight_sethsv_range(HSV_NUM, 39, 45);
-        //Numbers
-        rgblight_sethsv_range(HSV_NUM,11,15);
-        rgblight_sethsv_at(HSV_NUM,9);
-        //Symbols
-        rgblight_sethsv_range(HSV_BSYM,6,9);
-        // rgblight_sethsv_range(HSV_CHARTREUSE,16,19);
-        rgblight_sethsv_at(HSV_PNUM,22);
-        break;
-
-        case _NUMP:
-        //Backlights
-        rgblight_sethsv_range(HSV_PNUM, 0, 6);
-        rgblight_sethsv_range(HSV_PNUM, 39, 45);
-        //Numbers
-        rgblight_sethsv_range(HSV_PNUM,11,15);
-        rgblight_sethsv_at(HSV_PNUM,9);
-        //Symbols
-        rgblight_sethsv_range(HSV_BSYM,6,9);
-
-        break;
-
-        case _NAV:
-        //Backlights
-        rgblight_sethsv_range(HSV_PURPLE, 0, 6);
-        rgblight_sethsv_range(HSV_PURPLE, 39, 45);
-
-        rgblight_sethsv_range(HSV_PURPLE,11,15);
-        break;
-
-        case _WNAV:
-        break;
-
-        case _FUN:
-        break;
-
-        case _GAME:
-        //Backlights
-        rgblight_sethsv_range(HSV_RED, 0, 6);
-        rgblight_sethsv_range(HSV_RED, 39, 45);
-
-        break;
-
-        case _JP1:
-        //Backlights
-        rgblight_sethsv_range(HSV_BLUE, 0, 6);
-        rgblight_sethsv_range(HSV_BLUE, 39, 45);
-
-        break;
-
-        case _JP2:
-        //Backlights
-        rgblight_sethsv_range(HSV_BLUE, 0, 6);
-        rgblight_sethsv_range(HSV_BLUE, 39, 45);
-
-        break;
-
-        case _JP3:
-        //Backlights
-        rgblight_sethsv_range(HSV_BLUE, 0, 6);
-        rgblight_sethsv_range(HSV_BLUE, 39, 45);
-
-        break;
-
-        case _JP4:
-        //Backlights
-        rgblight_sethsv_range(HSV_BLUE, 0, 6);
-        rgblight_sethsv_range(HSV_BLUE, 39, 45);
-
-        break;
+void rgb_matrix_set_layer(enum Colors_ layer[static RGB_MATRIX_LED_COUNT]){
+    for(int i=0; i<RGB_MATRIX_LED_COUNT; i++){
+        int r = Colors[layer[i]*3];
+        int g = Colors[layer[i]*3+1];
+        int b = Colors[layer[i]*3+2];
+        rgb_matrix_set_color(led_map[i], r,g,b);
     }
+}
+
+bool rgb_matrix_indicators_user(void) {
+    if(get_highest_layer(layer_state)==_SHRT)
+        rgb_matrix_set_layer(led_shrt);
+    else
+        rgb_matrix_set_layer(led_base);
+
+    return false;
 }
