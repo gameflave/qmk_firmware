@@ -8,7 +8,6 @@
 #include "host.h"
 #include "info_config.h"
 #include "keyboard.h"
-#include "keycodes.h"
 #include "modifiers.h"
 #include "print.h"
 
@@ -16,6 +15,9 @@
 
 #include "keymap_us_international.h"
 #include "g/keymap_combo.h" // Get combos from combos.def
+
+#include "keycodes.h"
+#include "rgb.h"
 
 #include "config.h"
 
@@ -28,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 SHRT   ,US_E   ,      SPACE   ,MO(_NUM)
     ),
     [_BSYM] = LAYOUT(
-        US_UNDS,US_LPRN,US_RPRN,_______,_______,     _______,RM_TOGG,RM_HUED,RM_NEXT,RM_SPDU,
+        US_UNDS,US_LPRN,US_RPRN,_______,_______,     _______,_______,_______,_______,_______,
         _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______,
         _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______,
                                 _______,_______,     _______,_______
@@ -256,58 +258,16 @@ void keyboard_post_init_user() {
         tap_code(KC_NUM_LOCK);
 }
 
-uint8_t led_map[] = {
-     0, 1, 2,        25,24,23,
-     3, 4, 5,        28,27,26,
-
-  6, 7, 8, 9,10,  29,30,31,32,33,
- 11,12,13,14,15,  34,35,36,37,38,
- 16,17,18,19,20,  39,40,41,42,43,
-          21,22,  44,45,
-};
-
-enum Colors_ {
-    RED,
-    GREEN,
-    WHITE,
-};
-uint8_t Colors[] = {
-    100, 10, 10,
-    10, 100, 10,
-    100,100,100,
-};
-
-enum Colors_ led_base[RGB_MATRIX_LED_COUNT] = {
-RED,RED,RED,RED,RED,RED,
-RED,RED,RED,RED,RED,RED,
-WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,
-WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,
-WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,
-RED,RED,RED,RED,
-};
-enum Colors_ led_shrt[RGB_MATRIX_LED_COUNT] = {
-WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,
-WHITE,WHITE,WHITE,WHITE,WHITE,WHITE,
-GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,
-GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,
-GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,GREEN,
-WHITE,WHITE,WHITE,WHITE,
-};
-
-void rgb_matrix_set_layer(enum Colors_ layer[static RGB_MATRIX_LED_COUNT]){
-    for(int i=0; i<RGB_MATRIX_LED_COUNT; i++){
-        int r = Colors[layer[i]*3];
-        int g = Colors[layer[i]*3+1];
-        int b = Colors[layer[i]*3+2];
-        rgb_matrix_set_color(led_map[i], r,g,b);
-    }
-}
-
 bool rgb_matrix_indicators_user(void) {
-    if(get_highest_layer(layer_state)==_SHRT)
-        rgb_matrix_set_layer(led_shrt);
-    else
-        rgb_matrix_set_layer(led_base);
+    switch (get_highest_layer(layer_state)) {
+        case _SHRT: rgb_matrix_set_layer(rgb_shrt); break;
+        case _BSYM: rgb_matrix_set_layer(rgb_bsym); break;
+        case _NUM : rgb_matrix_set_layer(rgb_num ); break;
+
+        case _BASE:
+        default:
+            rgb_matrix_set_layer(rgb_base);
+    }
 
     return false;
 }
