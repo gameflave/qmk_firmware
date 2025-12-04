@@ -25,8 +25,8 @@
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
         AGRV   ,EGRV   ,US_EACU,US_B   ,US_Q   ,      US_F    ,US_D    ,US_L   ,QUOT   ,US_X,
-        US_A   ,US_I   ,US_O   ,US_U   ,US_COMM,      US_P    ,US_T    ,US_S   ,US_R   ,US_N,
-        US_K   ,US_Y   ,US_J ,US_DOT ,US_W   ,      US_G    ,US_C    ,US_M   ,US_H   ,US_V,
+        US_A   ,US_I   ,US_O   ,US_U   ,US_COMM,      US_P    ,US_T,US_S   ,US_R   ,US_N,
+        US_K   ,US_Y   ,US_J   ,US_DOT ,US_W   ,      US_G    ,US_C    ,US_M   ,US_H   ,US_V,
                                 SHRT   ,US_E   ,      SPACE   ,MO(_NUM)
     ),
     [_BSYM] = LAYOUT(
@@ -54,8 +54,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 _______,XXXXXXX,      _______,_______
     ),
     [_NUM] = LAYOUT(
-        US_UNDS,US_LPRN,US_RPRN,US_8   ,_______,      _______,US_9   ,KC_PPLS,KC_PMNS,KC_PAST,
-        US_6   ,US_4   ,US_0   ,US_2   ,_______,      KC_PSLS,US_3   ,US_1   ,US_5   ,US_7   ,
+        US_1   ,US_2   ,US_3   ,US_4   ,US_5   ,      _______,US_9   ,KC_PPLS,KC_PMNS,KC_PAST,
+        US_6   ,US_7   ,US_8   ,US_9   ,US_0   ,      KC_PSLS,US_3   ,US_1   ,US_5   ,US_7   ,
         _______,_______,_______,_______,_______,      _______,_______,_______,_______,_______,
                               XXXXXXX,MO(_NUMP),      _______,XXXXXXX
     ),
@@ -236,7 +236,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
 uint16_t get_combo_term(uint16_t combo_index, combo_t* combo){
     switch (combo->keycode) {
         case CW_TOGG:
-        case KC_LCTL:
             return 50;
     }
     return COMBO_TERM;
