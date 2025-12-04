@@ -1,6 +1,7 @@
 #pragma once
 
 #include "color.h"
+
 uint8_t led_map[] = {
         0, 1, 2,        25,24,23,
         3, 4, 5,        28,27,26,
