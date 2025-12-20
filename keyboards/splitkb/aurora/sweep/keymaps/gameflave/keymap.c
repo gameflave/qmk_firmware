@@ -10,6 +10,8 @@
 #include "keyboard.h"
 #include "modifiers.h"
 #include "print.h"
+#include "quantum_keycodes.h"
+#include "report.h"
 
 #include QMK_KEYBOARD_H
 
@@ -24,51 +26,57 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
-        AGRV   ,EGRV   ,US_EACU,US_B   ,US_Q   ,      US_F    ,US_D    ,US_L   ,QUOT   ,US_X,
-        US_A   ,US_I   ,US_O   ,US_U   ,US_COMM,      US_P    ,US_T,US_S   ,US_R   ,US_N,
-        US_K   ,US_Y   ,US_J   ,US_DOT ,US_W   ,      US_G    ,US_C    ,US_M   ,US_H   ,US_V,
-                                SHRT   ,US_E   ,      SPACE   ,MO(_NUM)
+        AGRV   ,US_J   ,US_EACU,US_B   ,QU     ,      US_F   ,US_D   ,US_L   ,QUOT   ,US_X   ,
+        NAV_A  ,SYM_I  ,CTL_O  ,SHFT_U ,ALT_COM,      US_P   ,SHFT_T ,CTL_S  ,SYM_R  ,NUM_N  ,
+        US_K   ,US_Y   ,LT(_MOUS,EGRV)   ,US_DOT ,US_W   ,      US_G   ,US_C   ,LT(_FUN, US_M)   ,US_H   ,US_V   ,
+                                KC_LGUI,US_E   ,      KC_SPC ,MO(_SHRT)
     ),
-    [_BSYM] = LAYOUT(
-        US_UNDS,US_LPRN,US_RPRN,_______,_______,     _______,_______,_______,_______,_______,
-        _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______,
-        _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______,
-                                _______,_______,     _______,_______
+    [_SYML] = LAYOUT(
+        US_EXLM,US_LCBR,US_RCBR,US_HASH  ,TIL    ,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+        CIR    ,US_LPRN,US_RPRN,US_UNDS  ,DQUOT  ,      XXXXXXX,KC_ENT ,KC_ESC ,XXXXXXX,XXXXXXX,
+        US_BSLS,US_AT  ,US_EQL ,KC_KP_DOT,US_NDAC,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+                                _______  ,_______,      _______,_______
+    ),
+    [_SYMR] = LAYOUT(
+        XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,      US_PERC,US_QUES,US_LABK,US_RABK,US_ASTR,
+        XXXXXXX,XXXXXXX,KC_BSPC,KC_DEL ,KC_TAB ,      US_SLSH,US_COLN,US_LBRC,US_RBRC,US_DLR ,
+        XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,      US_MINS,US_AMPR,US_PIPE,US_SCLN,US_PLUS,
+                                _______,_______,      _______,_______
     ),
     [_SHRT] = LAYOUT(
-        _______,_______,_______,_______,_______,      _______,US_EURO,US_YEN ,_______,_______,
-        C(US_X),C(US_C),C(US_S),C(US_V),C(US_Z),      US_DGRV,US_DIAE,US_DCIR,US_ACUT,US_DTIL,
-        _______,_______,_______,_______,S(KC_F1),     KC_PSCR,  GAME ,  NAV  ,  JAP  ,_______,
-                                SHRT,   _______,      KC_SPACE,MO(_FUN)
+        _______,_______,_______,_______,_______ ,     _______,US_EURO,US_YEN  ,_______,_______,
+        C(US_X),C(US_C),C(US_S),C(US_V),C(US_Z) ,     US_DGRV,US_DIAE,US_DCIR ,US_ACUT,US_DTIL,
+        _______,_______,_______,_______,S(KC_F1),     KC_PSCR,GAME   ,TG(_NAV),JAP    ,_______,
+                                _______,_______ ,     _______,_______
     ),
     [_NAV] = LAYOUT(
-        _______,_______,_______,_______,_______,     KC_PGUP,KC_HOME,_______,KC_END ,_______ ,
-        KC_LGUI,KC_LALT,KC_LCTL,KC_LSFT,_______,     KC_PGDN,KC_LEFT,KC_DOWN,KC_UP  ,KC_RIGHT,
-        _______,_______,_______,_______,_______,     _______,_______,_______,_______,_______ ,
-                                _______,MO(_WNAV),   TG(_NAV),_______
-    ),
-    [_WNAV] = LAYOUT(
-        _______,_______,_______,G(US_8),_______,      _______,G(US_9),_______,_______,_______,
-        G(US_6),G(US_4),G(US_0),G(US_2),_______,      _______,G(US_3),G(US_1),G(US_5),G(US_7),
-        KC_LGUI,KC_LALT,KC_LCTL,KC_LSFT,_______,      _______,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI,
-                                _______,XXXXXXX,      _______,_______
+        _______,_______  ,KC_BSPC,KC_DEL ,_______,    KC_PGUP,KC_HOME,_______,KC_END ,_______ ,
+        _______,MO(_MOUS),KC_LCTL,KC_LSFT,_______,    KC_PGDN,KC_LEFT,KC_DOWN,KC_UP  ,KC_RIGHT,
+        _______,_______  ,_______,_______,_______,    _______,_______,_______,_______,_______ ,
+                                  _______,_______,    _______,_______
     ),
     [_NUM] = LAYOUT(
-        US_1   ,US_2   ,US_3   ,US_4   ,US_5   ,      _______,US_9   ,KC_PPLS,KC_PMNS,KC_PAST,
-        US_6   ,US_7   ,US_8   ,US_9   ,US_0   ,      KC_PSLS,US_3   ,US_1   ,US_5   ,US_7   ,
-        _______,_______,_______,_______,_______,      _______,_______,_______,_______,_______,
-                              XXXXXXX,MO(_NUMP),      _______,XXXXXXX
+        XXXXXXX ,US_1  ,US_2   ,US_3   ,XXXXXXX,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX  ,XXXXXXX,
+        MO(_NAV),US_4  ,US_5   ,US_6   ,US_0   ,      KC_LALT,KC_LSFT,KC_LCTL,MO(_NUMP),XXXXXXX,
+        XXXXXXX ,US_7  ,US_8   ,US_9   ,XXXXXXX,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX  ,XXXXXXX,
+                                _______,_______,      _______,_______
     ),
     [_NUMP] = LAYOUT(
-        _______,_______,_______,KC_KP_8,_______,     _______,KC_KP_9,_______,_______,_______,
-        KC_KP_6,KC_KP_4,KC_KP_0,KC_KP_2,_______,     _______,KC_KP_3,KC_KP_1,KC_KP_5,KC_KP_7,
-        _______,_______,_______,KC_PDOT,_______,     _______,_______,_______,_______,_______,
-                                _______,_______,     _______,_______
+        XXXXXXX ,KC_KP_1,KC_KP_2,KC_KP_3,XXXXXXX,     XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+        MO(_NAV),KC_KP_4,KC_KP_5,KC_KP_6,KC_KP_0,     XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+        XXXXXXX ,KC_KP_7,KC_KP_8,KC_KP_9,XXXXXXX,     XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+                                 _______,_______,     _______,_______
+    ),
+    [_MOUS] = LAYOUT(
+        _______,_______,KC_RETN,KC_DEL ,_______,      MS_WHLU,KC_HOME,_______,KC_END ,_______ ,
+        KC_LGUI,KC_LALT,KC_LCTL,KC_LSFT,MS_BTN2,      MS_WHLD,MS_LEFT,MS_DOWN,MS_UP  ,MS_RGHT ,
+        _______,_______,_______,_______,_______,      _______,MS_ACL0,MS_ACL1,MS_ACL2,_______ ,
+                                _______,MS_BTN1,      _______,_______
     ),
     [_FUN] = LAYOUT(
-        _______,_______,_______,KC_F8  ,_______,      _______,KC_F9  ,_______,_______,_______,
-        KC_F6  ,KC_F4  ,KC_F10 ,KC_F2  ,KC_F12 ,      KC_F11 ,KC_F3  ,KC_F1  ,KC_F5  ,KC_F7,
-        _______,_______,_______,_______,_______,      _______,_______,_______,_______,_______,
+        _______,KC_F1  ,KC_F2  ,KC_F3  ,KC_F11 ,      _______,_______,_______,_______,_______,
+        _______,KC_F4  ,KC_F5  ,KC_F6  ,KC_F10 ,      _______,_______,_______,_______,_______,
+        _______,KC_F7  ,KC_F8  ,KC_F9  ,KC_F12 ,      _______,_______,_______,_______,_______,
                                 _______,_______,      _______,_______
     ),
     [_GAME] = LAYOUT(
@@ -233,22 +241,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
     }
 }
 
-uint16_t get_combo_term(uint16_t combo_index, combo_t* combo){
-    switch (combo->keycode) {
-        case CW_TOGG:
-            return 50;
-    }
-    return COMBO_TERM;
-}
-
 layer_state_t layer_state_set_user(layer_state_t state) {
-    switch (get_highest_layer(state)) {
-        case _GAME:
-            combo_disable();
-            break;
-        default:
-            combo_enable();
-        }
     return state;
 }
 
@@ -259,9 +252,14 @@ void keyboard_post_init_user() {
 
 bool rgb_matrix_indicators_user(void) {
     switch (get_highest_layer(layer_state)) {
-        case _SHRT: rgb_matrix_set_layer(rgb_shrt); break;
-        case _BSYM: rgb_matrix_set_layer(rgb_bsym); break;
-        case _NUM : rgb_matrix_set_layer(rgb_num ); break;
+        case _SHRT: rgb_matrix_set_layer(rgb_shrt  ); break;
+        case _SYML: rgb_matrix_set_layer(rgb_bsym_l); break;
+        case _SYMR: rgb_matrix_set_layer(rgb_bsym_r); break;
+        case _NUM : rgb_matrix_set_layer(rgb_num   ); break;
+        case _NUMP: rgb_matrix_set_layer(rgb_num   ); break;
+        case _NAV : rgb_matrix_set_layer(rgb_nav   ); break;
+        case _MOUS: rgb_matrix_set_layer(rgb_mouse ); break;
+        case _FUN : rgb_matrix_set_layer(rgb_fun   ); break;
 
         case _BASE:
         default:

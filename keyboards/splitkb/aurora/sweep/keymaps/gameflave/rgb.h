@@ -1,5 +1,7 @@
 #pragma once
 
+#include <math.h>
+#include "action_code.h"
 #include "color.h"
 
 uint8_t led_map[] = {
@@ -19,14 +21,15 @@ enum colors_names {
     FUN_C  ,
     BSYM_C ,
     NUM_C  ,
-    PNUM_C ,
+    NUMP_C ,
     NAV_C  ,
-    WNAV_C ,
+    MOUSE_C,
     GAME_C ,
     JP1_C  ,
     JP2_C  ,
     JP3_C  ,
     JP4_C  ,
+    MOD_C  ,
 };
 
 rgb_t rgb_colors[] = {
@@ -36,11 +39,12 @@ rgb_t rgb_colors[] = {
     [FUN_C  ]={ 10, 50, 10},
     [BSYM_C ]={ 35,101,244},
     [NUM_C  ]={0x00,0xFF,0x51},
-    [PNUM_C ]={ 10, 50, 10},
+    [NUMP_C ]={ 10, 50, 10},
     [NAV_C  ]={ 54, 74,225},
-    [WNAV_C ]={ 31, 54,225},
+    [MOUSE_C]={ 31, 54,225},
     [GAME_C ]={100, 10, 10},
     [JP1_C  ]={100, 80,100},
+    [MOD_C  ]={100, 80,100},
 };
 
 void rgb_matrix_set_layer(enum colors_names rgb_layer[static RGB_MATRIX_LED_COUNT]){
@@ -57,16 +61,25 @@ enum colors_names rgb_base[] = {
     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
-                            SHRT_C ,BASE_C ,     BASE_C ,NUM_C  ,
+                            BASE_C ,BASE_C ,     BASE_C ,BASE_C ,
 };
-enum colors_names rgb_bsym[] = {
+enum colors_names rgb_bsym_l[] = {
             BSYM_C ,BSYM_C ,BSYM_C ,                     BSYM_C ,BSYM_C ,BSYM_C ,
             BSYM_C ,BSYM_C ,BSYM_C ,                     BSYM_C ,BSYM_C ,BSYM_C ,
 
-    BSYM_C ,BSYM_C ,BSYM_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
-    BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
-    BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
-                            SHRT_C ,BASE_C ,     BASE_C ,NUM_C  ,
+    BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+    BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,     BLACK_C,MOD_C  ,MOD_C  ,BSYM_C ,BLACK_C,
+    BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+                            BASE_C ,BASE_C ,     BASE_C ,BASE_C ,
+};
+enum colors_names rgb_bsym_r[] = {
+            BSYM_C ,BSYM_C ,BSYM_C ,                     BSYM_C ,BSYM_C ,BSYM_C ,
+            BSYM_C ,BSYM_C ,BSYM_C ,                     BSYM_C ,BSYM_C ,BSYM_C ,
+
+    BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,
+    BLACK_C,BSYM_C ,MOD_C  ,MOD_C  ,MOD_C  ,     BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,
+    BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,
+                            BASE_C ,BASE_C ,     BASE_C ,BASE_C ,
 };
 enum colors_names rgb_shrt[] = {
             SHRT_C ,SHRT_C ,SHRT_C ,                     SHRT_C ,SHRT_C ,SHRT_C ,
@@ -81,8 +94,35 @@ enum colors_names rgb_num[] = {
             NUM_C  ,NUM_C  ,NUM_C  ,                     NUM_C  ,NUM_C  ,NUM_C  ,
             NUM_C  ,NUM_C  ,NUM_C  ,                     NUM_C  ,NUM_C  ,NUM_C  ,
 
-    BLACK_C,BLACK_C,BLACK_C,NUM_C  ,BLACK_C,     BLACK_C,NUM_C  ,BSYM_C ,BSYM_C ,BSYM_C ,
-    NUM_C  ,NUM_C  ,NUM_C  ,NUM_C  ,BASE_C ,     BSYM_C ,NUM_C  ,NUM_C  ,NUM_C  ,NUM_C  ,
-    BLACK_C,BLACK_C,BLACK_C,BASE_C ,BLACK_C,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
-                            SHRT_C ,BASE_C ,     BASE_C ,NUM_C  ,
+    BLACK_C,NUM_C  ,NUM_C  ,NUM_C  ,BLACK_C,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+    NAV_C  ,NUM_C  ,NUM_C  ,NUM_C  ,NUM_C  ,     BLACK_C,BLACK_C,BLACK_C,NUMP_C ,BLACK_C,
+    BLACK_C,NUM_C  ,NUM_C  ,NUM_C  ,BLACK_C,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+                            BLACK_C,BLACK_C,     BASE_C ,BLACK_C,
+};
+enum colors_names rgb_nav[] = {
+            NAV_C  ,NAV_C  ,NAV_C  ,                     NAV_C  ,NAV_C  ,NAV_C  ,
+            NAV_C  ,NAV_C  ,NAV_C  ,                     NAV_C  ,NAV_C  ,NAV_C  ,
+
+    BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     NAV_C  ,NAV_C  ,BLACK_C,NAV_C  ,BLACK_C,
+    BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     NAV_C  ,NAV_C  ,NAV_C  ,NAV_C  ,NAV_C  ,
+    BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+                            BLACK_C,BLACK_C,     BLACK_C,BLACK_C,
+};
+enum colors_names rgb_mouse[] = {
+            MOUSE_C,MOUSE_C,MOUSE_C,                     MOUSE_C,MOUSE_C,MOUSE_C,
+            MOUSE_C,MOUSE_C,MOUSE_C,                     MOUSE_C,MOUSE_C,MOUSE_C,
+
+    BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     MOUSE_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+    BLACK_C,BLACK_C,BLACK_C,BLACK_C,MOUSE_C,     MOUSE_C,MOUSE_C,MOUSE_C,MOUSE_C,MOUSE_C,
+    BLACK_C,BLACK_C,MOUSE_C,BLACK_C,BLACK_C,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+                            BLACK_C,MOUSE_C,     BLACK_C,BLACK_C,
+};
+enum colors_names rgb_fun[] = {
+            FUN_C  ,FUN_C  ,FUN_C  ,                     FUN_C  ,FUN_C  ,FUN_C  ,
+            FUN_C  ,FUN_C  ,FUN_C  ,                     FUN_C  ,FUN_C  ,FUN_C  ,
+
+    BLACK_C,FUN_C  ,FUN_C  ,FUN_C  ,FUN_C  ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+    BLACK_C,FUN_C  ,FUN_C  ,FUN_C  ,FUN_C  ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+    BLACK_C,FUN_C  ,FUN_C  ,FUN_C  ,FUN_C  ,     BLACK_C,BLACK_C,FUN_C  ,BLACK_C,BLACK_C,
+                            BLACK_C,BLACK_C,     BLACK_C,BLACK_C,
 };

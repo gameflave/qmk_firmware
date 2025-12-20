@@ -7,19 +7,20 @@
 #include "keymap_us_international.h"
 
 enum layers_ {
-    _BASE,	// White
-    _BSYM,	// Green
-    _SHRT,	// Green
-    _NAV,	// Purple
-    _WNAV,	// Purple
-    _GAME,	// Red
-    _JP1,	// Blue
-    _JP2,	//
-    _JP3,	//
-    _JP4,	//
-    _NUM,	// Yellow
-    _NUMP,	//
-    _FUN,	//
+    _BASE,
+    _SYML,
+    _SYMR,
+    _SHRT,
+    _NAV,
+    _GAME,
+    _JP1,
+    _JP2,
+    _JP3,
+    _JP4,
+    _NUM,
+    _NUMP,
+    _FUN,
+    _MOUS,
 };
 
 enum custom_keycodes_ {
@@ -39,12 +40,18 @@ enum custom_keycodes_ {
     AT_U,
 };
 
-#define SHRT MO(_SHRT)
-#define NAV  TG(_NAV)
+#define NAV_A   LT(_NAV,US_A)
+#define SYM_I   LT(_SYMR,US_I)
+#define CTL_O   LCTL_T(US_O)
+#define SHFT_U  LSFT_T(US_U)
+#define ALT_COM LALT_T(US_COMM)
+#define SHFT_T  RSFT_T(US_T)
+#define CTL_S   LCTL_T(US_S)
+#define SYM_R   LT(_SYML,US_R)
+#define NUM_N   LT(_NUM,US_N)
+
 #define GAME TG(_GAME)
 #define JAP  TG(_JP1)
-#define SPACE LT(_NAV,KC_SPACE)
-#define C_UP LCTL_T(KC_UP)
 
 // #####################################################################
 // JAPANESE
