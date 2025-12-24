@@ -26,9 +26,9 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
-        AGRV   ,US_J   ,US_EACU,US_B   ,QU     ,      US_F   ,US_D   ,US_L   ,QUOT   ,US_X   ,
+        AGRV   ,LT(_MOUS,US_J)   ,US_EACU,US_B   ,QU     ,      US_F   ,US_D   ,US_L   ,QUOT   ,US_X   ,
         NAV_A  ,SYM_I  ,CTL_O  ,SHFT_U ,ALT_COM,      US_P   ,SHFT_T ,CTL_S  ,SYM_R  ,NUM_N  ,
-        US_K   ,US_Y   ,LT(_MOUS,EGRV)   ,US_DOT ,US_W   ,      US_G   ,US_C   ,LT(_FUN, US_M)   ,US_H   ,US_V   ,
+        US_K   ,US_Y   ,EGRV   ,US_DOT ,US_W   ,      US_G   ,US_C   ,LT(_FUN, US_M)   ,US_H   ,US_V   ,
                                 KC_LGUI,US_E   ,      KC_SPC ,MO(_SHRT)
     ),
     [_SYML] = LAYOUT(
@@ -68,8 +68,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  _______,_______,     _______,_______
     ),
     [_MOUS] = LAYOUT(
-        _______,_______,KC_RETN,KC_DEL ,_______,      MS_WHLU,KC_HOME,_______,KC_END ,_______ ,
-        KC_LGUI,KC_LALT,KC_LCTL,KC_LSFT,MS_BTN2,      MS_WHLD,MS_LEFT,MS_DOWN,MS_UP  ,MS_RGHT ,
+        _______,_______,MS_BTN3,MS_BTN2,_______,      MS_WHLU,KC_HOME,_______,KC_END ,_______ ,
+        _______,_______,KC_LCTL,KC_LSFT,KC_LALT,      MS_WHLD,MS_LEFT,MS_DOWN,MS_UP  ,MS_RGHT ,
         _______,_______,_______,_______,_______,      _______,MS_ACL0,MS_ACL1,MS_ACL2,_______ ,
                                 _______,MS_BTN1,      _______,_______
     ),
@@ -260,6 +260,7 @@ bool rgb_matrix_indicators_user(void) {
         case _NAV : rgb_matrix_set_layer(rgb_nav   ); break;
         case _MOUS: rgb_matrix_set_layer(rgb_mouse ); break;
         case _FUN : rgb_matrix_set_layer(rgb_fun   ); break;
+        case _GAME: rgb_matrix_set_layer(rgb_game  ); break;
 
         case _BASE:
         default:

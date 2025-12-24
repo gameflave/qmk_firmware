@@ -61,7 +61,7 @@ enum colors_names rgb_base[] = {
     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
-                            BASE_C ,BASE_C ,     BASE_C ,BASE_C ,
+                            MOD_C  ,BASE_C ,     BASE_C ,BASE_C ,
 };
 enum colors_names rgb_bsym_l[] = {
             BSYM_C ,BSYM_C ,BSYM_C ,                     BSYM_C ,BSYM_C ,BSYM_C ,
@@ -70,7 +70,7 @@ enum colors_names rgb_bsym_l[] = {
     BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
     BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,     BLACK_C,MOD_C  ,MOD_C  ,BSYM_C ,BLACK_C,
     BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
-                            BASE_C ,BASE_C ,     BASE_C ,BASE_C ,
+                            MOD_C  ,BASE_C ,     BASE_C ,BASE_C ,
 };
 enum colors_names rgb_bsym_r[] = {
             BSYM_C ,BSYM_C ,BSYM_C ,                     BSYM_C ,BSYM_C ,BSYM_C ,
@@ -79,7 +79,7 @@ enum colors_names rgb_bsym_r[] = {
     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,
     BLACK_C,BSYM_C ,MOD_C  ,MOD_C  ,MOD_C  ,     BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,
     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,
-                            BASE_C ,BASE_C ,     BASE_C ,BASE_C ,
+                            MOD_C  ,BASE_C ,     BASE_C ,BASE_C ,
 };
 enum colors_names rgb_shrt[] = {
             SHRT_C ,SHRT_C ,SHRT_C ,                     SHRT_C ,SHRT_C ,SHRT_C ,
@@ -88,7 +88,7 @@ enum colors_names rgb_shrt[] = {
     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     BLACK_C,BSYM_C ,BSYM_C ,BLACK_C,BLACK_C,
     SHRT_C ,SHRT_C ,SHRT_C ,SHRT_C ,SHRT_C ,     BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,
     BLACK_C,BLACK_C,BLACK_C,BLACK_C,SHRT_C ,     SHRT_C ,GAME_C ,NAV_C  ,JP1_C  ,BLACK_C,
-                            SHRT_C ,BASE_C ,     BASE_C ,FUN_C  ,
+                            MOD_C  ,BASE_C ,     BASE_C ,SHRT_C ,
 };
 enum colors_names rgb_num[] = {
             NUM_C  ,NUM_C  ,NUM_C  ,                     NUM_C  ,NUM_C  ,NUM_C  ,
@@ -97,7 +97,7 @@ enum colors_names rgb_num[] = {
     BLACK_C,NUM_C  ,NUM_C  ,NUM_C  ,BLACK_C,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
     NAV_C  ,NUM_C  ,NUM_C  ,NUM_C  ,NUM_C  ,     BLACK_C,BLACK_C,BLACK_C,NUMP_C ,BLACK_C,
     BLACK_C,NUM_C  ,NUM_C  ,NUM_C  ,BLACK_C,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
-                            BLACK_C,BLACK_C,     BASE_C ,BLACK_C,
+                            MOD_C  ,BLACK_C,     BASE_C ,BLACK_C,
 };
 enum colors_names rgb_nav[] = {
             NAV_C  ,NAV_C  ,NAV_C  ,                     NAV_C  ,NAV_C  ,NAV_C  ,
@@ -106,16 +106,16 @@ enum colors_names rgb_nav[] = {
     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     NAV_C  ,NAV_C  ,BLACK_C,NAV_C  ,BLACK_C,
     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     NAV_C  ,NAV_C  ,NAV_C  ,NAV_C  ,NAV_C  ,
     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
-                            BLACK_C,BLACK_C,     BLACK_C,BLACK_C,
+                            MOD_C  ,BLACK_C,     BLACK_C,BLACK_C,
 };
 enum colors_names rgb_mouse[] = {
             MOUSE_C,MOUSE_C,MOUSE_C,                     MOUSE_C,MOUSE_C,MOUSE_C,
             MOUSE_C,MOUSE_C,MOUSE_C,                     MOUSE_C,MOUSE_C,MOUSE_C,
 
-    BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     MOUSE_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
-    BLACK_C,BLACK_C,BLACK_C,BLACK_C,MOUSE_C,     MOUSE_C,MOUSE_C,MOUSE_C,MOUSE_C,MOUSE_C,
-    BLACK_C,BLACK_C,MOUSE_C,BLACK_C,BLACK_C,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
-                            BLACK_C,MOUSE_C,     BLACK_C,BLACK_C,
+    BLACK_C,MOUSE_C,BLACK_C,MOUSE_C,BLACK_C,     MOUSE_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+    BLACK_C,BLACK_C,MOD_C  ,MOD_C  ,MOD_C  ,     MOUSE_C,MOUSE_C,MOUSE_C,MOUSE_C,MOUSE_C,
+    BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+                            MOD_C  ,MOUSE_C,     BLACK_C,BLACK_C,
 };
 enum colors_names rgb_fun[] = {
             FUN_C  ,FUN_C  ,FUN_C  ,                     FUN_C  ,FUN_C  ,FUN_C  ,
@@ -124,5 +124,14 @@ enum colors_names rgb_fun[] = {
     BLACK_C,FUN_C  ,FUN_C  ,FUN_C  ,FUN_C  ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
     BLACK_C,FUN_C  ,FUN_C  ,FUN_C  ,FUN_C  ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
     BLACK_C,FUN_C  ,FUN_C  ,FUN_C  ,FUN_C  ,     BLACK_C,BLACK_C,FUN_C  ,BLACK_C,BLACK_C,
-                            BLACK_C,BLACK_C,     BLACK_C,BLACK_C,
+                            MOD_C  ,BLACK_C,     BLACK_C,BLACK_C,
+};
+enum colors_names rgb_game[] = {
+            GAME_C ,GAME_C ,GAME_C ,                     GAME_C ,GAME_C ,GAME_C ,
+            GAME_C ,GAME_C ,GAME_C ,                     GAME_C ,GAME_C ,GAME_C ,
+
+    BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
+    BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
+    BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
+                            MOD_C  ,BASE_C ,     BASE_C ,BASE_C ,
 };
