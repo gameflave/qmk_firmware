@@ -26,7 +26,7 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
-        AGRV   ,LT(_MOUS,US_J)   ,US_EACU,US_B   ,QU     ,      US_F   ,US_D   ,US_L   ,QUOT   ,US_X   ,
+        AGRV   ,LT(_MOUS,US_J)   ,US_EACU,US_B ,QU_Q     ,      US_F   ,US_D   ,US_L   ,QUOT   ,US_X   ,
         NAV_A  ,SYM_I  ,CTL_O  ,SHFT_U ,ALT_COM,      US_P   ,SHFT_T ,CTL_S  ,SYM_R  ,NUM_N  ,
         US_K   ,US_Y   ,EGRV   ,US_DOT ,US_W   ,      US_G   ,US_C   ,LT(_FUN, US_M)   ,US_H   ,US_V   ,
                                 KC_LGUI,US_E   ,      KC_SPC ,MO(_SHRT)
@@ -147,45 +147,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
                 tap_code16(US_E);
             }
             return false;
-        case ECIR:
-            if(record->event.pressed)
-                { tap_code16(US_DCIR); tap_code16(US_E); }
-            return false;
-        case NEQL:
-            if (record->event.pressed) {
-                tap_code16(US_EXLM);
-                tap_code16(US_EQL);
-            }
-            return false;
-        case GRT:
-            if (record->event.pressed) {
-                tap_code16(US_LABK);
-                tap_code16(US_EQL);
-            }
-            return false;
-        case INF:
-            if (record->event.pressed) {
-                tap_code16(US_RABK);
-                tap_code16(US_EQL);
-            }
-            return false;
-        case QU:
-            if (record->event.pressed) {
+        case QU_Q:
+            if(record->event.pressed) {
                 tap_code16(US_Q);
-                tap_code16(US_U);
-            }
-            return false;
-        case AROW:
-            if (record->event.pressed) {
-                tap_code16(US_MINS);
-                tap_code16(US_RABK);
-            }
-            return false;
-
-        case AT_U:
-            if (record->event.pressed) {
-                tap_code16(US_AT);
-                tap_code16(US_U);
+                if(record->tap.count) tap_code16(US_U);
             }
             return false;
 

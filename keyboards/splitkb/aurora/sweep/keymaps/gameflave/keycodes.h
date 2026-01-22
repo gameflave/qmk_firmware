@@ -49,7 +49,10 @@ enum custom_keycodes_ {
 #define CTL_S   LCTL_T(US_S)
 #define SYM_R   LT(_SYML,US_R)
 #define NUM_N   LT(_NUM,US_N)
+#define MOUS_J  LT(_MOUS,US_J)
+#define FUN_M   LT(_FUN,US_M)
 
+#define QU_Q LT(0,QU)
 #define GAME TG(_GAME)
 #define JAP  TG(_JP1)
 
