@@ -26,9 +26,9 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
-        AGRV   ,LT(_MOUS,US_J)   ,US_EACU,US_B ,QU_Q     ,      US_F   ,US_D   ,US_L   ,QUOT   ,US_X   ,
-        NAV_A  ,SYM_I  ,CTL_O  ,SHFT_U ,ALT_COM,      US_P   ,SHFT_T ,CTL_S  ,SYM_R  ,NUM_N  ,
-        US_K   ,US_Y   ,EGRV   ,US_DOT ,US_W   ,      US_G   ,US_C   ,LT(_FUN, US_M)   ,US_H   ,US_V   ,
+        AGRV   ,MOUS_J ,US_EACU,US_B   ,QU_Q   ,      US_F   ,US_D   ,US_L   ,QUOT   ,US_X   ,
+        NAV_A  ,SYM_I  ,CTL_O  ,SHFT_U ,ALT_COM,      ALT_P  ,SHFT_T ,CTL_S  ,SYM_R  ,NUM_N  ,
+        US_K   ,US_Y   ,EGRV   ,US_DOT ,US_W   ,      US_G   ,US_C   ,FUN_M  ,US_H   ,US_V   ,
                                 KC_LGUI,US_E   ,      KC_SPC ,MO(_SHRT)
     ),
     [_SYML] = LAYOUT(
@@ -44,9 +44,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 _______,_______,      _______,_______
     ),
     [_SHRT] = LAYOUT(
-        _______,_______,_______,_______,_______ ,     _______,US_EURO,US_YEN  ,_______,_______,
-        C(US_X),C(US_C),C(US_S),C(US_V),C(US_Z) ,     US_DGRV,US_DIAE,US_DCIR ,US_ACUT,US_DTIL,
-        _______,_______,_______,_______,S(KC_F1),     KC_PSCR,GAME   ,TG(_NAV),JAP    ,_______,
+        _______,_______,_______,_______,_______ ,     _______,US_EURO,US_YEN ,_______,_______, //TODO: shortcut ctr+alt+F(1-2-3)
+        C(US_X),C(US_C),C(US_S),C(US_V),C(US_Z) ,     US_DGRV,US_DIAE,US_DCIR,US_ACUT,US_DTIL,
+        _______,_______,_______,_______,S(KC_F1),     KC_PSCR,GAME   ,_______,JAP    ,_______,
                                 _______,_______ ,     _______,_______
     ),
     [_NAV] = LAYOUT(

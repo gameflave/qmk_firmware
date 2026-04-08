@@ -95,7 +95,7 @@ enum colors_names rgb_num[] = {
             NUM_C  ,NUM_C  ,NUM_C  ,                     NUM_C  ,NUM_C  ,NUM_C  ,
 
     BLACK_C,NUM_C  ,NUM_C  ,NUM_C  ,BLACK_C,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
-    NAV_C  ,NUM_C  ,NUM_C  ,NUM_C  ,NUM_C  ,     BLACK_C,BLACK_C,BLACK_C,NUMP_C ,BLACK_C,
+    NAV_C  ,NUM_C  ,NUM_C  ,NUM_C  ,NUM_C  ,     MOD_C  ,MOD_C  ,MOD_C  ,NUMP_C ,BLACK_C,
     BLACK_C,NUM_C  ,NUM_C  ,NUM_C  ,BLACK_C,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
                             MOD_C  ,BLACK_C,     BASE_C ,BLACK_C,
 };
@@ -104,7 +104,7 @@ enum colors_names rgb_nav[] = {
             NAV_C  ,NAV_C  ,NAV_C  ,                     NAV_C  ,NAV_C  ,NAV_C  ,
 
     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     NAV_C  ,NAV_C  ,BLACK_C,NAV_C  ,BLACK_C,
-    BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     NAV_C  ,NAV_C  ,NAV_C  ,NAV_C  ,NAV_C  ,
+    NAV_C  ,BLACK_C,MOD_C  ,MOD_C  ,MOD_C  ,     NAV_C  ,NAV_C  ,NAV_C  ,NAV_C  ,NAV_C  ,
     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
                             MOD_C  ,BLACK_C,     BLACK_C,BLACK_C,
 };

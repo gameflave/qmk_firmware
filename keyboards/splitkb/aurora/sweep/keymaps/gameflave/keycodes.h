@@ -45,6 +45,7 @@ enum custom_keycodes_ {
 #define CTL_O   LCTL_T(US_O)
 #define SHFT_U  LSFT_T(US_U)
 #define ALT_COM LALT_T(US_COMM)
+#define ALT_P   LALT_T(US_P)
 #define SHFT_T  RSFT_T(US_T)
 #define CTL_S   LCTL_T(US_S)
 #define SYM_R   LT(_SYML,US_R)
