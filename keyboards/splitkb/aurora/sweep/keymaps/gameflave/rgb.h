@@ -29,22 +29,28 @@ enum colors_names {
     JP2_C  ,
     JP3_C  ,
     JP4_C  ,
+    JPS_C  ,
     MOD_C  ,
 };
 
 rgb_t rgb_colors[] = {
-    [BLACK_C]={   0,   0,   0},
-    [BASE_C ]={0xB4,0xB4,0xB4},
+    [BLACK_C]={0   ,   0,   0},
+    [BASE_C ]={0xF2,0x24,0x9E},
+    // [BASE_C ]={0xB4,0xB4,0xB4},
     [SHRT_C ]={0xFF,0x70,0x00},
-    [FUN_C  ]={ 10, 50, 10},
-    [BSYM_C ]={ 35,101,244},
+    [FUN_C  ]={  10,  50,  10},
+    [BSYM_C ]={  35, 101, 244},
     [NUM_C  ]={0x00,0xFF,0x51},
-    [NUMP_C ]={ 10, 50, 10},
-    [NAV_C  ]={ 54, 74,225},
-    [MOUSE_C]={ 31, 54,225},
-    [GAME_C ]={100, 10, 10},
-    [JP1_C  ]={100, 80,100},
-    [MOD_C  ]={100, 80,100},
+    [NUMP_C ]={  10,  50,  10},
+    [NAV_C  ]={  54,  74, 225},
+    [MOUSE_C]={  31,  54, 225},
+    [GAME_C ]={ 100,  10,  10},
+    [JP1_C  ]={0x70,0x1c,0xe2},
+    [JP2_C  ]={0xe2,0xa5,0x1c},
+    [JP3_C  ]={0x1c,0xe2,0x65},
+    [JP4_C  ]={0xe2,0x1c,0x1c},
+    [JPS_C  ]={0x1c,0x65,0xe2},
+    [MOD_C  ]={0x60,0x22,0xF3},
 };
 
 void rgb_matrix_set_layer(enum colors_names rgb_layer[static RGB_MATRIX_LED_COUNT]){
@@ -134,4 +140,40 @@ enum colors_names rgb_game[] = {
     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
                             MOD_C  ,BASE_C ,     BASE_C ,BASE_C ,
+};
+enum colors_names rgb_jap1[] = {
+            JP1_C  ,JP1_C  ,JP1_C  ,                     JP1_C  ,JP1_C  ,JP1_C  ,
+            JP1_C  ,JP1_C  ,JP1_C  ,                     JP1_C  ,JP1_C  ,JP1_C  ,
+
+    JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,     JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,
+    JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,     JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,
+    JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,     JP1_C  ,JP1_C  ,MOD_C  ,MOD_C  ,JPS_C  ,
+                            NAV_C  ,JP2_C  ,     JP3_C  ,JP1_C  ,
+};
+enum colors_names rgb_jap2[] = {
+            JP2_C  ,JP2_C  ,JP2_C  ,                     JP3_C  ,JP3_C  ,JP3_C  ,
+            JP2_C  ,JP2_C  ,JP2_C  ,                     JP3_C  ,JP3_C  ,JP3_C  ,
+
+    JP2_C  ,JP2_C  ,BLACK_C,JPS_C  ,JP2_C  ,     JP3_C  ,JP3_C  ,JP3_C  ,BLACK_C,BLACK_C,
+    JP2_C  ,JP2_C  ,JPS_C  ,JPS_C  ,JP2_C  ,     BLACK_C,JP3_C  ,JP3_C  ,JP3_C  ,MOD_C  ,
+    JPS_C  ,JPS_C  ,JP2_C  ,JP2_C  ,JP2_C  ,     JP3_C  ,JP3_C  ,BLACK_C,BLACK_C,MOD_C  ,
+                            BLACK_C,JP2_C  ,     JP4_C  ,BASE_C ,
+};
+enum colors_names rgb_jap3[] = {
+            JP3_C  ,JP3_C  ,JP3_C  ,                     JP2_C  ,JP2_C  ,JP2_C  ,
+            JP3_C  ,JP3_C  ,JP3_C  ,                     JP2_C  ,JP2_C  ,JP2_C  ,
+
+    JP3_C  ,JP3_C  ,JP3_C  ,JP3_C  ,JP3_C  ,     JP2_C  ,JP2_C  ,JP2_C  ,JP2_C  ,JP2_C  ,
+    JP3_C  ,JP3_C  ,JP3_C  ,JP3_C  ,JP3_C  ,     JP2_C  ,JP2_C  ,JP2_C  ,JP2_C  ,JP2_C  ,
+    BLACK_C,BLACK_C,JP3_C  ,JP3_C  ,JP3_C  ,     JP2_C  ,JPS_C  ,JPS_C  ,BLACK_C,BLACK_C,
+                            MOD_C  ,JP4_C  ,     JP4_C  ,BLACK_C,
+};
+enum colors_names rgb_jap4[] = {
+            JP4_C  ,JP4_C  ,JP4_C  ,                     JP4_C  ,JP4_C  ,JP4_C  ,
+            JP4_C  ,JP4_C  ,JP4_C  ,                     JP4_C  ,JP4_C  ,JP4_C  ,
+
+    JP4_C  ,BLACK_C,BLACK_C,JP4_C  ,JP4_C  ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+    BLACK_C,BLACK_C,BLACK_C,BLACK_C,JP4_C  ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+    BLACK_C,BLACK_C,BLACK_C,BLACK_C,JP4_C  ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
+                            BLACK_C,JP4_C  ,     JP4_C  ,BLACK_C,
 };

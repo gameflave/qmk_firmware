@@ -31,6 +31,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         US_K   ,US_Y   ,EGRV   ,US_DOT ,US_W   ,      US_G   ,US_C   ,FUN_M  ,US_H   ,US_V   ,
                                 KC_LGUI,US_E   ,      KC_SPC ,MO(_SHRT)
     ),
+    [_JP1] = LAYOUT(
+        JP_RA  ,JP_RU  ,JP_KO  ,JP_HA  ,JP_YO  ,      JP_KI  ,JP_NO  ,JP_KU  ,JP_A   ,JP_RE  ,
+        JP_TA  ,JP_TO  ,JP_KA  ,JP_TE  ,JP_MO  ,      JP_WO  ,JP_I   ,JP_U   ,JP_SI  ,JP_N   ,
+        JP_MA  ,JP_RI  ,JP_NI  ,JP_SA  ,JP_NA  ,      JP_SU  ,JP_TU  ,KC_ENT ,KC_TAB ,JP_S_TU,
+                               MO(_NAV),MO(_JP2),     MO(_JP3),KC_SPC
+    ),
+    [_JP2] = LAYOUT(
+        JP_HI  ,JP_SO  ,XXXXXXX,JP_S_YA,JP_HO  ,      JP_GI  ,JP_GE  ,JP_GU  ,XXXXXXX,XXXXXXX,
+        JP_NU  ,JP_NE  ,JP_S_YU,JP_S_YO,JP_HU  ,      XXXXXXX,JP_DI  ,JP_VU  ,JP_ZI  ,JP_HENK,
+        JP_S_E ,JP_S_O ,JP_SE  ,JP_YU  ,JP_HE  ,      JP_ZU  ,JP_DU  ,XXXXXXX,XXXXXXX,JP_KANA,
+                                _______,_______,      MO(_JP4),TG(_JP1)
+    ),
+    [_JP3] = LAYOUT(
+        JP_BI  ,JP_ZO  ,JP_GO  ,JP_BA  ,JP_BO  ,      JP_E   ,JP_KE  ,JP_ME  ,JP_MU  ,JP_RO  ,
+        JP_DA  ,JP_DO  ,JP_GA  ,JP_DE  ,JP_BU  ,      JP_O   ,JP_TI  ,KC_PMNS,JP_MI  ,JP_YA  ,
+        XXXXXXX,XXXXXXX,JP_ZE  ,JP_ZA  ,JP_BE  ,      JP_WA  ,JP_S_I ,JP_S_A ,JP_S_U ,XXXXXXX,
+                                KC_BSPC,MO(_JP4),     _______,_______
+    ),
+    [_JP4] = LAYOUT(
+        JP_PI  ,XXXXXXX,XXXXXXX,JP_PA  ,JP_PO  ,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+        XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,JP_PU  ,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+        XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,JP_PE  ,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+                                _______,_______,      _______,_______
+    ),
     [_SYML] = LAYOUT(
         US_EXLM,US_LCBR,US_RCBR,US_HASH  ,TIL    ,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
         CIR    ,US_LPRN,US_RPRN,US_UNDS  ,DQUOT  ,      XXXXXXX,KC_ENT ,KC_ESC ,XXXXXXX,XXXXXXX,
@@ -85,31 +109,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,US_A   ,US_S   ,US_D   ,US_F   ,      US_G   ,US_H   ,US_J   ,US_K   ,US_L   ,
                                 KC_LCTL,KC_SPACE,     TG(_GAME),XXXXXXX
     ),
-    [_JP1] = LAYOUT(
-        JP_RA  ,JP_RU  ,JP_KO  ,JP_HA  ,JP_YO  ,      JP_KI  ,JP_NO  ,JP_KU  ,JP_A   ,JP_RE  ,
-        JP_TA  ,JP_TO  ,JP_KA  ,JP_TE  ,JP_MO  ,      JP_WO  ,JP_I   ,JP_U   ,JP_SI  ,JP_N   ,
-        JP_MA  ,JP_RI  ,JP_NI  ,JP_SA  ,JP_NA  ,      JP_SU  ,JP_TU  ,KC_TAB ,XXXXXXX,JP_S_TU,
-                                KC_SPC ,MO(_JP2),     MO(_JP3),KC_ENT
-    ),
-    [_JP2] = LAYOUT(
-        JP_HI  ,JP_SO  ,KC_BSPC,JP_S_YA,JP_HO  ,      JP_GI  ,JP_GE  ,JP_GU  ,XXXXXXX,XXXXXXX,
-        JP_NU  ,JP_NE  ,JP_S_YU,JP_S_YO,JP_HU  ,      XXXXXXX,JP_DI  ,JP_VU  ,JP_ZI  ,XXXXXXX,
-        JP_S_E ,JP_S_O ,JP_SE  ,JP_YU  ,JP_HE  ,      JP_ZU  ,JP_DU  ,TG(_JP1),XXXXXXX,XXXXXXX,
-                                _______,_______,      MO(_JP4),_______
-    ),
-    [_JP3] = LAYOUT(
-        JP_BI  ,JP_ZO  ,JP_GO  ,JP_BA  ,JP_BO  ,      JP_E   ,JP_KE  ,JP_ME  ,JP_MU  ,JP_RO  ,
-        JP_DA  ,JP_DO  ,JP_GA  ,JP_DE  ,JP_BU  ,      JP_O   ,JP_TI  ,KC_PMNS,JP_MI  ,JP_YA  ,
-        JP_S_KA,JP_S_KE,JP_ZE  ,JP_ZA  ,JP_BE  ,      JP_WA  ,JP_S_I ,JP_S_A ,XXXXXXX,XXXXXXX,
-                                _______,MO(_JP4),     _______,_______
-    ),
-
-    [_JP4] = LAYOUT(
-        JP_PI  ,XXXXXXX,XXXXXXX,JP_PA  ,JP_PO  ,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
-        XXXXXXX,XXXXXXX,XXXXXXX,S(KC_SPC),JP_PU,      XXXXXXX,JP_MHEN,XXXXXXX,XXXXXXX,XXXXXXX,
-        XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,JP_PE  ,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
-                                _______,_______,      _______,_______
-    )
 };
 
 #define UNDEAD(Key,DKey) case Key: if(record->event.pressed) {tap_code16(DKey);tap_code16(KC_SPACE);} return false;
@@ -176,30 +175,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
         TAP_CODE(JP_A,KC_3)      TAP_CODE(JP_KA,KC_T)	TAP_CODE(JP_SA,KC_X)  TAP_CODE(JP_TA,KC_Q)  TAP_CODE(JP_NA,KC_U)	 TAP_CODE(JP_HA,KC_F)	TAP_CODE(JP_MA,KC_J)	TAP_CODE(JP_YA,KC_7)	TAP_CODE(JP_RA,KC_O)    TAP_CODE(JP_WA,KC_0)
         TAP_CODE(JP_I,KC_E)      TAP_CODE(JP_KI,KC_G)	TAP_CODE(JP_SI,KC_D)  TAP_CODE(JP_TI,KC_A)  TAP_CODE(JP_NI,KC_I)	 TAP_CODE(JP_HI,KC_V)	TAP_CODE(JP_MI,KC_N)	                        TAP_CODE(JP_RI,KC_L)    TAP_CODE(JP_WI,KC_NO)
         TAP_CODE(JP_U,KC_4)      TAP_CODE(JP_KU,KC_H)	TAP_CODE(JP_SU,KC_R)  TAP_CODE(JP_TU,KC_Z)  TAP_CODE(JP_NU,KC_1)	 TAP_CODE(JP_HU,KC_2)	TAP_CODE(JP_MU,KC_NUHS)	TAP_CODE(JP_YU,KC_8)	TAP_CODE(JP_RU,KC_DOT)
-        TAP_CODE(JP_E,KC_5)      TAP_CODE(JP_KE,KC_HELP)TAP_CODE(JP_SE,KC_P)  TAP_CODE(JP_TE,KC_W)  TAP_CODE(JP_NE,KC_COMM)	 TAP_CODE(JP_HE,KC_EQL)	TAP_CODE(JP_ME,KC_SLSH)	                        TAP_CODE(JP_RE,KC_SCLN) TAP_CODE(JP_WE,KC_NO)
-        TAP_CODE(JP_O,KC_6)      TAP_CODE(JP_KO,KC_B)	TAP_CODE(JP_SO,KC_C)  TAP_CODE(JP_TO,KC_S)  TAP_CODE(JP_NO,KC_K)	 TAP_CODE(JP_HO,KC_MINS)TAP_CODE(JP_MO,KC_M)	TAP_CODE(JP_YO,KC_9)	TAP_CODE(JP_RO,KC_INT1) TAP_CODE(JP_WO,OSM(KC_LSFT))  TAP_CODE(JP_N,KC_Y)
+        TAP_CODE(JP_E,KC_5)      TAP_CODE(JP_KE,KC_QUOT)TAP_CODE(JP_SE,KC_P)  TAP_CODE(JP_TE,KC_W)  TAP_CODE(JP_NE,KC_COMM)	 TAP_CODE(JP_HE,KC_EQL)	TAP_CODE(JP_ME,KC_SLSH)	                        TAP_CODE(JP_RE,KC_SCLN) TAP_CODE(JP_WE,KC_NO)
+        TAP_CODE(JP_O,KC_6)      TAP_CODE(JP_KO,KC_B)	TAP_CODE(JP_SO,KC_C)  TAP_CODE(JP_TO,KC_S)  TAP_CODE(JP_NO,KC_K)	 TAP_CODE(JP_HO,KC_MINS)TAP_CODE(JP_MO,KC_M)	TAP_CODE(JP_YO,KC_9)	TAP_CODE(JP_RO,KC_INT1) TAP_CODE(JP_WO,S(KC_0))  TAP_CODE(JP_N,KC_Y)
 
                                             TAP_CODES(JP_GA, JP_KA  , KC_LBRC)     TAP_CODES(JP_ZA, JP_SA, KC_LBRC)     TAP_CODES(JP_DA, JP_TA, KC_LBRC)     TAP_CODES(JP_BA, JP_HA, KC_LBRC)     TAP_CODES(JP_PA, JP_HA, KC_RBRC)
                                             TAP_CODES(JP_GI, JP_KI  , KC_LBRC)     TAP_CODES(JP_ZI, JP_SI, KC_LBRC)     TAP_CODES(JP_DI, JP_TI, KC_LBRC)     TAP_CODES(JP_BI, JP_HI, KC_LBRC)     TAP_CODES(JP_PI, JP_HI, KC_RBRC)
         TAP_CODES(JP_VU, JP_U, KC_LBRC)     TAP_CODES(JP_GU, JP_KU  , KC_LBRC)     TAP_CODES(JP_ZU, JP_SU, KC_LBRC)     TAP_CODES(JP_DU, JP_TU, KC_LBRC)     TAP_CODES(JP_BU, JP_HU, KC_LBRC)     TAP_CODES(JP_PU, JP_HU, KC_RBRC)
-                                            TAP_CODES(JP_GE, KC_QUOT, KC_LBRC)     TAP_CODES(JP_ZE, JP_SE, KC_LBRC)     TAP_CODES(JP_DE, JP_TE, KC_LBRC)     TAP_CODES(JP_BE, JP_HE, KC_LBRC)     TAP_CODES(JP_PE, JP_HE, KC_RBRC)
+                                            TAP_CODES(JP_GE, JP_KE  , KC_LBRC)     TAP_CODES(JP_ZE, JP_SE, KC_LBRC)     TAP_CODES(JP_DE, JP_TE, KC_LBRC)     TAP_CODES(JP_BE, JP_HE, KC_LBRC)     TAP_CODES(JP_PE, JP_HE, KC_RBRC)
                                             TAP_CODES(JP_GO, JP_KO  , KC_LBRC)     TAP_CODES(JP_ZO, JP_SO, KC_LBRC)     TAP_CODES(JP_DO, JP_TO, KC_LBRC)     TAP_CODES(JP_BO, JP_HO, KC_LBRC)     TAP_CODES(JP_PO, JP_HO, KC_RBRC)
-        case JP_S_A:
-        case JP_S_I:
-        case JP_S_U:
-        case JP_S_E:
-        case JP_S_O:
-        case JP_S_TU:
-        case JP_S_YA:
-        case JP_S_YU:
-        case JP_S_YO:
-        case JP_S_WA:
-            if(record->event.pressed) {
-                tap_code16(OSM(KC_LSFT));
-                tap_code16(KC_0);
-            }
-            return false;
 
+        TAP_CODE(JP_S_A,S(KC_3))            TAP_CODE(JP_S_YA,S(KC_7))
+        TAP_CODE(JP_S_I,S(KC_E))
+        TAP_CODE(JP_S_U,S(KC_4))            TAP_CODE(JP_S_YU,S(KC_8))              TAP_CODE(JP_S_TU, S(KC_Z))
+        TAP_CODE(JP_S_E,S(KC_5))
+        TAP_CODE(JP_S_O,S(KC_6))            TAP_CODE(JP_S_YO,S(KC_9))
 #endif
         default:
             return true;
@@ -226,6 +215,10 @@ bool rgb_matrix_indicators_user(void) {
         case _MOUS: rgb_matrix_set_layer(rgb_mouse ); break;
         case _FUN : rgb_matrix_set_layer(rgb_fun   ); break;
         case _GAME: rgb_matrix_set_layer(rgb_game  ); break;
+        case _JP1 : rgb_matrix_set_layer(rgb_jap1  ); break;
+        case _JP2 : rgb_matrix_set_layer(rgb_jap2  ); break;
+        case _JP3 : rgb_matrix_set_layer(rgb_jap3  ); break;
+        case _JP4 : rgb_matrix_set_layer(rgb_jap4  ); break;
 
         case _BASE:
         default:

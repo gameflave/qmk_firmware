@@ -60,7 +60,7 @@ enum custom_keycodes_ {
 // #####################################################################
 // JAPANESE
 // #####################################################################
-#define DIRECT_KANA
+// #define DIRECT_KANA
 
 #define JP_RANGE QK_USER+100
 
@@ -69,8 +69,8 @@ enum custom_keycodes_ {
 #define JP_KANA KC_INT2 // Katakana ↔ Hiragana ↔ Rōmaji (カタカナ ↔ ひらがな ↔ ローマ字)
 
 #ifndef DIRECT_KANA
-#include "sendstring_us_international.h"
 
+// #include "sendstring_us_international.h"
 #define SS_KC(keycode, string) case keycode: if(record->event.pressed) SEND_STRING(string); return false;
 
 #else
