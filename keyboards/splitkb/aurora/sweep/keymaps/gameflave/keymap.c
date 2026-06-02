@@ -35,19 +35,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         JP_RA  ,JP_RU  ,JP_KO  ,JP_HA  ,JP_YO  ,      JP_KI  ,JP_NO  ,JP_KU  ,JP_A   ,JP_RE  ,
         JP_TA  ,JP_TO  ,JP_KA  ,JP_TE  ,JP_MO  ,      JP_WO  ,JP_I   ,JP_U   ,JP_SI  ,JP_N   ,
         JP_MA  ,JP_RI  ,JP_NI  ,JP_SA  ,JP_NA  ,      JP_SU  ,JP_TU  ,KC_ENT ,KC_TAB ,JP_S_TU,
-                               MO(_NAV),MO(_JP2),     MO(_JP3),KC_SPC
+                               MO(_JP2),XXXXXXX,      KC_SPC,MO(_JP3)
     ),
     [_JP2] = LAYOUT(
-        JP_HI  ,JP_SO  ,XXXXXXX,JP_S_YA,JP_HO  ,      JP_GI  ,JP_GE  ,JP_GU  ,XXXXXXX,XXXXXXX,
+        JP_HI  ,JP_SO  ,JAP    ,JP_S_YA,JP_HO  ,      JP_GI  ,JP_GE  ,JP_GU  ,XXXXXXX,XXXXXXX,
         JP_NU  ,JP_NE  ,JP_S_YU,JP_S_YO,JP_HU  ,      XXXXXXX,JP_DI  ,JP_VU  ,JP_ZI  ,JP_HENK,
         JP_S_E ,JP_S_O ,JP_SE  ,JP_YU  ,JP_HE  ,      JP_ZU  ,JP_DU  ,XXXXXXX,XXXXXXX,JP_KANA,
-                                _______,_______,      MO(_JP4),TG(_JP1)
+                                _______,_______,      _______,MO(_JP4)
     ),
     [_JP3] = LAYOUT(
         JP_BI  ,JP_ZO  ,JP_GO  ,JP_BA  ,JP_BO  ,      JP_E   ,JP_KE  ,JP_ME  ,JP_MU  ,JP_RO  ,
         JP_DA  ,JP_DO  ,JP_GA  ,JP_DE  ,JP_BU  ,      JP_O   ,JP_TI  ,KC_PMNS,JP_MI  ,JP_YA  ,
         XXXXXXX,XXXXXXX,JP_ZE  ,JP_ZA  ,JP_BE  ,      JP_WA  ,JP_S_I ,JP_S_A ,JP_S_U ,XXXXXXX,
-                                KC_BSPC,MO(_JP4),     _______,_______
+                               MO(_JP4),_______,      _______,_______
     ),
     [_JP4] = LAYOUT(
         JP_PI  ,XXXXXXX,XXXXXXX,JP_PA  ,JP_PO  ,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
@@ -68,9 +68,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 _______,_______,      _______,_______
     ),
     [_SHRT] = LAYOUT(
-        _______,_______,_______,_______,_______ ,     _______,US_EURO,US_YEN ,_______,_______, //TODO: shortcut ctr+alt+F(1-2-3)
-        C(US_X),C(US_C),C(US_S),C(US_V),C(US_Z) ,     US_DGRV,US_DIAE,US_DCIR,US_ACUT,US_DTIL,
-        _______,_______,_______,_______,S(KC_F1),     KC_PSCR,GAME   ,_______,JAP    ,_______,
+        _______,GAME   ,JAP    ,_______,_______ ,     _______,US_EURO,US_YEN ,_______,_______, //TODO: shortcut ctr+alt+F(1-2-3)
+        _______,_______,_______,_______,_______ ,     US_DTIL,US_ACUT,US_DCIR,US_DIAE,US_DGRV,
+        _______,_______,_______,_______,S(KC_F1),     KC_PSCR,_______,_______,_______,_______,
                                 _______,_______ ,     _______,_______
     ),
     [_NAV] = LAYOUT(
@@ -153,6 +153,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
             }
             return false;
 
+        case JAP:
+            if(record->event.pressed) {
+                layer_invert(_JP1);
+                tap_code16(JP_HENK);
+            }
+            return false;
 #ifndef DIRECT_KANA
         SS_KC(JP_A,"a")      SS_KC(JP_KA,"ka")	SS_KC(JP_SA,"sa")  SS_KC(JP_TA,"ta")  SS_KC(JP_NA,"na")	 SS_KC(JP_HA,"ha")	SS_KC(JP_MA,"ma")	SS_KC(JP_YA,"ya")	SS_KC(JP_RA,"ra")  SS_KC(JP_WA,"wa")
         SS_KC(JP_I,"i")      SS_KC(JP_KI,"ki")	SS_KC(JP_SI,"si")  SS_KC(JP_TI,"ti")  SS_KC(JP_NI,"ni")	 SS_KC(JP_HI,"hi")	SS_KC(JP_MI,"mi")	                    SS_KC(JP_RI,"ri")  SS_KC(JP_WI,"wi")
@@ -172,6 +178,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record){
         SS_KC(JP_S_E,"xe")   SS_KC(JP_S_KE,"xke")
         SS_KC(JP_S_O,"xo")                                                                                                                      SS_KC(JP_S_YO,"xyo")
 #else
+        //TODO:
         TAP_CODE(JP_A,KC_3)      TAP_CODE(JP_KA,KC_T)	TAP_CODE(JP_SA,KC_X)  TAP_CODE(JP_TA,KC_Q)  TAP_CODE(JP_NA,KC_U)	 TAP_CODE(JP_HA,KC_F)	TAP_CODE(JP_MA,KC_J)	TAP_CODE(JP_YA,KC_7)	TAP_CODE(JP_RA,KC_O)    TAP_CODE(JP_WA,KC_0)
         TAP_CODE(JP_I,KC_E)      TAP_CODE(JP_KI,KC_G)	TAP_CODE(JP_SI,KC_D)  TAP_CODE(JP_TI,KC_A)  TAP_CODE(JP_NI,KC_I)	 TAP_CODE(JP_HI,KC_V)	TAP_CODE(JP_MI,KC_N)	                        TAP_CODE(JP_RI,KC_L)    TAP_CODE(JP_WI,KC_NO)
         TAP_CODE(JP_U,KC_4)      TAP_CODE(JP_KU,KC_H)	TAP_CODE(JP_SU,KC_R)  TAP_CODE(JP_TU,KC_Z)  TAP_CODE(JP_NU,KC_1)	 TAP_CODE(JP_HU,KC_2)	TAP_CODE(JP_MU,KC_NUHS)	TAP_CODE(JP_YU,KC_8)	TAP_CODE(JP_RU,KC_DOT)

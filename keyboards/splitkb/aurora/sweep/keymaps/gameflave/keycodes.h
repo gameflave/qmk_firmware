@@ -38,6 +38,7 @@ enum custom_keycodes_ {
     DQUOT,
     ECIR,
     AT_U,
+    JAP,
 };
 
 #define NAV_A   LT(_NAV,US_A)
@@ -55,7 +56,6 @@ enum custom_keycodes_ {
 
 #define QU_Q LT(0,QU)
 #define GAME TG(_GAME)
-#define JAP  TG(_JP1)
 
 // #####################################################################
 // JAPANESE
