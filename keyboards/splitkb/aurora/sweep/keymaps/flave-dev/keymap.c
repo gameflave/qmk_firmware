@@ -35,19 +35,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         JP_RA  ,JP_RU  ,JP_KO  ,JP_HA  ,JP_YO  ,      JP_KI  ,JP_NO  ,JP_KU  ,JP_A   ,JP_RE  ,
         JP_TA  ,JP_TO  ,JP_KA  ,JP_TE  ,JP_MO  ,      JP_WO  ,JP_I   ,JP_U   ,JP_SI  ,JP_N   ,
         JP_MA  ,JP_RI  ,JP_NI  ,JP_SA  ,JP_NA  ,      JP_SU  ,JP_TU  ,KC_ENT ,KC_TAB ,JP_S_TU,
-                               MO(_JP2),JP_E   ,      KC_SPC,MO(_JP3)
+                                JAP    ,MO(_JP2),     MO(_JP3),KC_SPC
     ),
     [_JP2] = LAYOUT(
-        JP_HI  ,JP_SO  ,JAP    ,JP_S_YA,JP_HO  ,      JP_GI  ,JP_GE  ,JP_GU  ,XXXXXXX,XXXXXXX,
+        JP_HI  ,JP_SO  ,_______,JP_S_YA,JP_HO  ,      JP_GI  ,JP_GE  ,JP_GU  ,XXXXXXX,XXXXXXX,
         JP_NU  ,JP_NE  ,JP_S_YU,JP_S_YO,JP_HU  ,      XXXXXXX,JP_DI  ,JP_VU  ,JP_ZI  ,JP_HENK,
         JP_S_E ,JP_S_O ,JP_SE  ,JP_YU  ,JP_HE  ,      JP_ZU  ,JP_DU  ,XXXXXXX,XXXXXXX,JP_KANA,
-                                _______,_______,      _______,MO(_JP4)
+                                _______,_______,      MO(_JP4),_______
     ),
     [_JP3] = LAYOUT(
         JP_BI  ,JP_ZO  ,JP_GO  ,JP_BA  ,JP_BO  ,      JP_E   ,JP_KE  ,JP_ME  ,JP_MU  ,JP_RO  ,
-        JP_DA  ,JP_DO  ,JP_GA  ,JP_DE  ,JP_BU  ,      JP_O   ,JP_TI  ,KC_PMNS,JP_MI  ,JP_YA  ,
+        JP_DA  ,JP_DO  ,JP_GA  ,JP_DE  ,JP_BU  ,      JP_O   ,JP_TI  ,KC_MINS,JP_MI  ,JP_YA  ,
         XXXXXXX,XXXXXXX,JP_ZE  ,JP_ZA  ,JP_BE  ,      JP_WA  ,JP_S_I ,JP_S_A ,JP_S_U ,XXXXXXX,
-                               MO(_JP4),_______,      _______,_______
+                                _______,MO(_JP4),     _______,_______
     ),
     [_JP4] = LAYOUT(
         JP_PI  ,XXXXXXX,XXXXXXX,JP_PA  ,JP_PO  ,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
@@ -68,10 +68,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 _______,_______,      _______,_______
     ),
     [_SHRT] = LAYOUT(
-        _______,GAME   ,JAP    ,_______,_______ ,     _______,US_EURO,US_YEN ,_______,_______, //TODO: shortcut ctr+alt+F(1-2-3)
+        _______,GAME   ,_______,_______,_______ ,     _______,US_EURO,US_YEN ,_______,_______, //TODO: shortcut ctr+alt+F(1-2-3)
         _______,_______,_______,_______,_______ ,     US_DTIL,US_ACUT,US_DCIR,US_DIAE,US_DGRV,
         _______,_______,_______,_______,S(KC_F1),     KC_PSCR,_______,_______,_______,_______,
-                                _______,_______ ,     _______,_______
+                                JAP    ,_______ ,     _______,_______
     ),
     [_NAV] = LAYOUT(
         _______,_______  ,KC_BSPC,KC_DEL ,_______,    KC_PGUP,KC_HOME,_______,KC_END ,_______ ,
