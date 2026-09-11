@@ -27,11 +27,12 @@ enum colors_names {
     NAV_C,
     MOUSE_C,
     GAME_C,
-    JP1_C,
-    JP2_C,
-    JP3_C,
-    JP4_C,
-    JPS_C,
+    JNMR_C,
+    JVOW_C,
+    JKST_C,
+    JSML_C,
+    JHYW_C,
+    JWHT_C,
     MOD_C,
 };
 
@@ -47,11 +48,12 @@ rgb_t rgb_colors[] = {
     [NAV_C]   = {54, 74, 225},
     [MOUSE_C] = {31, 54, 225},
     [GAME_C]  = {100, 10, 10},
-    [JP1_C]   = {0x70, 0x1c, 0xe2},
-    [JP2_C]   = {0xe2, 0xa5, 0x1c},
-    [JP3_C]   = {0x1c, 0xe2, 0x65},
-    [JP4_C]   = {0xe2, 0x1c, 0x1c},
-    [JPS_C]   = {0x1c, 0x65, 0xe2},
+    [JNMR_C]   = {0xB0, 0x1A, 0xFF},
+    [JVOW_C]   = {0xE2, 0x1C, 0x1C},
+    [JKST_C]   = {0x2A, 0xFF, 0x2A},
+    [JSML_C]   = {0xE2, 0xA5, 0x1C},
+    [JHYW_C]   = {0x00, 0x80, 0xFF},
+    [JWHT_C]   = {0xC8, 0xC8, 0xC8},
     [MOD_C]   = {0x60, 0x22, 0xF3},
 };
 
@@ -94,7 +96,7 @@ enum colors_names rgb_shrt[] = {
             SHRT_C ,SHRT_C ,SHRT_C ,                     SHRT_C ,SHRT_C ,SHRT_C ,
             SHRT_C ,SHRT_C ,SHRT_C ,                     SHRT_C ,SHRT_C ,SHRT_C ,
 
-    BLACK_C,GAME_C ,JP1_C  ,BLACK_C,BLACK_C,     BLACK_C,BSYM_C ,BSYM_C ,BLACK_C,BLACK_C,
+    BLACK_C,GAME_C ,JNMR_C  ,BLACK_C,BLACK_C,     BLACK_C,BSYM_C ,BSYM_C ,BLACK_C,BLACK_C,
     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,     BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,BSYM_C ,
     BLACK_C,BLACK_C,BLACK_C,BLACK_C,SHRT_C ,     SHRT_C ,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
                             MOD_C  ,BASE_C ,     BASE_C ,SHRT_C ,
@@ -144,31 +146,39 @@ enum colors_names rgb_game[] = {
     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,     BASE_C ,BASE_C ,BASE_C ,BASE_C ,BASE_C ,
                             MOD_C  ,BASE_C ,     BASE_C ,BASE_C ,
 };
+// JP kana color groups (consonant rows). One color per group, stable across _JP1/_JP2/_JP3:
+//   VOWEL (JVOW_C red)   : あいうえお ん っ
+//   KST   (JKST_C lime)  : かさた rows + voiced がざだ (かきくけこ さしすせそ たちつてと)
+//   NMR   (JNMR_C magen): なまら rows (なにぬねの まみむめも らりるれろ)
+//   HYW   (JHYW_C azure): はやわ rows + voiced/halved (はひふへほ ばびぶべぼ ぱぴぷぺぽ やゆよ わゐゑを ゔ)
+//   SMALL (JSML_C orange): small kana (ぁぃぅぇぉ ゃゅょっ ヵヶゎ)
+//   EXTRA (JWHT_C white) : non-kana function (、。punct HENK MHEN)
+// Punct/HENK/MHEN are white so kana hues stay pure. Thumbs are off (BLACK).
 enum colors_names rgb_jap1[] = {
-            JP1_C  ,JP1_C  ,JP1_C  ,                     JP1_C  ,JP1_C  ,JP1_C  ,
-            JP1_C  ,JP1_C  ,JP1_C  ,                     JP1_C  ,JP1_C  ,JP1_C  ,
+            JNMR_C  ,JNMR_C  ,JNMR_C  ,                     JNMR_C  ,JNMR_C  ,JNMR_C  ,
+            JNMR_C  ,JNMR_C  ,JNMR_C  ,                     JNMR_C  ,JNMR_C  ,JNMR_C  ,
 
-    JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,     JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,
-    JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,     JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,
-    JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,JP1_C  ,     JP1_C  ,JP1_C  ,MOD_C  ,MOD_C  ,JPS_C  ,
-                            JP2_C  ,JP1_C  ,     BASE_C ,JP3_C  ,
+    JKST_C  ,JVOW_C  ,JVOW_C  ,JKST_C  ,JKST_C  ,     JNMR_C  ,JHYW_C  ,JNMR_C  ,JNMR_C  ,JNMR_C  ,
+    JKST_C  ,JVOW_C  ,JHYW_C  ,JNMR_C  ,JWHT_C  ,     JKST_C  ,JKST_C  ,JNMR_C  ,JNMR_C  ,JVOW_C  ,
+    JKST_C  ,JVOW_C  ,JKST_C  ,JWHT_C  ,JKST_C  ,     JKST_C  ,JKST_C  ,JNMR_C  ,JNMR_C  ,JKST_C  ,
+                            BLACK_C,BLACK_C,     BLACK_C,BLACK_C,
 };
 enum colors_names rgb_jap2[] = {
-            JP2_C  ,JP2_C  ,JP2_C  ,                     JP3_C  ,JP3_C  ,JP3_C  ,
-            JP2_C  ,JP2_C  ,JP2_C  ,                     JP3_C  ,JP3_C  ,JP3_C  ,
+            JVOW_C  ,JVOW_C  ,JVOW_C  ,                     JKST_C  ,JKST_C  ,JKST_C  ,
+            JVOW_C  ,JVOW_C  ,JVOW_C  ,                     JKST_C  ,JKST_C  ,JKST_C  ,
 
-    JP2_C  ,JP2_C  ,BASE_C ,JPS_C  ,JP2_C  ,     JP3_C  ,JP3_C  ,JP3_C  ,BLACK_C,BLACK_C,
-    JP2_C  ,JP2_C  ,JPS_C  ,JPS_C  ,JP2_C  ,     BLACK_C,JP3_C  ,JP3_C  ,JP3_C  ,MOD_C  ,
-    JPS_C  ,JPS_C  ,JP2_C  ,JP2_C  ,JP2_C  ,     JP3_C  ,JP3_C  ,BLACK_C,BLACK_C,MOD_C  ,
-                            JP2_C  ,JP1_C  ,     BASE_C ,JP4_C
+    JHYW_C  ,JKST_C  ,JNMR_C  ,JHYW_C  ,JHYW_C  ,     JVOW_C  ,JHYW_C  ,JHYW_C  ,JHYW_C  ,JNMR_C  ,
+    JKST_C  ,JHYW_C  ,JKST_C  ,JKST_C  ,JNMR_C  ,     JKST_C  ,JKST_C  ,JVOW_C  ,JKST_C  ,JKST_C  ,
+    JKST_C  ,JKST_C  ,JNMR_C  ,JHYW_C  ,JKST_C  ,     JNMR_C  ,JHYW_C  ,JKST_C  ,JSML_C  ,JSML_C  ,
+                            BLACK_C,BLACK_C,     BLACK_C,BLACK_C
 };
 enum colors_names rgb_jap3[] = {
-            JP3_C  ,JP3_C  ,JP3_C  ,                     JP2_C  ,JP2_C  ,JP2_C  ,
-            JP3_C  ,JP3_C  ,JP3_C  ,                     JP2_C  ,JP2_C  ,JP2_C  ,
+            JKST_C  ,JKST_C  ,JKST_C  ,                     JVOW_C  ,JVOW_C  ,JVOW_C  ,
+            JKST_C  ,JKST_C  ,JKST_C  ,                     JVOW_C  ,JVOW_C  ,JVOW_C  ,
 
-    JP3_C  ,JP3_C  ,JP3_C  ,JP3_C  ,JP3_C  ,     JP2_C  ,JP2_C  ,JP2_C  ,JP2_C  ,JP2_C  ,
-    JP3_C  ,JP3_C  ,JP3_C  ,JP3_C  ,JP3_C  ,     JP2_C  ,JP2_C  ,JP2_C  ,JP2_C  ,JP2_C  ,
-    BLACK_C,BLACK_C,JP3_C  ,JP3_C  ,JP3_C  ,     JP2_C  ,JPS_C  ,JPS_C  ,BLACK_C,BLACK_C,
-                            JP4_C  ,JP1_C  ,     BASE_C ,JP4_C  ,
+    JSML_C  ,JSML_C  ,JSML_C  ,JSML_C  ,JSML_C  ,     JSML_C  ,JSML_C  ,JSML_C  ,JHYW_C  ,JHYW_C  ,
+    JKST_C  ,JHYW_C  ,JNMR_C  ,JHYW_C  ,JKST_C  ,     JHYW_C  ,JHYW_C  ,JKST_C  ,JKST_C  ,JKST_C  ,
+    JHYW_C  ,JKST_C  ,JHYW_C  ,JHYW_C  ,JHYW_C  ,     JSML_C  ,JHYW_C  ,JHYW_C  ,JWHT_C  ,JWHT_C  ,
+                            BLACK_C,BLACK_C,     BLACK_C,BLACK_C  ,
 };
 // clang-format on

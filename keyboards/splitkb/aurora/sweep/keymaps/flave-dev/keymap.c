@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_JP3] = LAYOUT(
         JP_ぁ  ,JP_ぃ  ,JP_ぇ  ,JP_ぉ  ,JP_ぅ  ,      JP_ゎ  ,JP_ヵ  ,JP_ヶ  ,JP_ゔ  ,JP_ゐ  ,
         JP_ざ  ,JP_べ  ,JP_ぬ  ,JP_ぶ  ,JP_ぎ  ,      JP_ゆ  ,JP_ぼ  ,JP_ぜ  ,JP_づ  ,JP_ぞ  ,
-        JP_ぱ  ,JP_ぢ  ,JP_ぽ  ,JP_ぴ  ,JP_ぺ  ,      JP_ゅ  ,JP_ぷ  ,JP_ゑ  ,XXXXXXX,XXXXXXX,
+        JP_ぱ  ,JP_ぢ  ,JP_ぽ  ,JP_ぴ  ,JP_ぺ  ,      JP_ゅ  ,JP_ぷ  ,JP_ゑ  ,JP_HENK,JP_MHEN,
                                 _______,_______,      _______,_______
     ),
     [_SYML] = LAYOUT(
