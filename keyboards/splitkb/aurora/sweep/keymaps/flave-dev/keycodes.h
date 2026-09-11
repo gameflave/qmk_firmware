@@ -8,15 +8,14 @@
 
 enum layers_ {
     _BASE,
+    _JP1,
+    _JP2,
+    _JP3,
     _SYML,
     _SYMR,
     _SHRT,
     _NAV,
     _GAME,
-    _JP1,
-    _JP2,
-    _JP3,
-    _JP4,
     _NUM,
     _NUMP,
     _FUN,
@@ -24,7 +23,8 @@ enum layers_ {
 };
 
 enum custom_keycodes_ {
-    AGRV = QK_USER,
+    KP_DOT = KC_KP_DOT,
+    AGRV   = QK_USER,
     EGRV,
     GRV,
     QUOT,
@@ -39,22 +39,24 @@ enum custom_keycodes_ {
     ECIR,
     AT_U,
     JAP,
+    JP2,
+    JP3,
+    JP_SHF,
 };
 
-#define NAV_A   LT(_NAV,US_A)
-#define SYM_I   LT(_SYMR,US_I)
-#define CTL_O   LCTL_T(US_O)
-#define SHFT_U  LSFT_T(US_U)
+#define NAV_A LT(_NAV, US_A)
+#define SYM_I LT(_SYMR, US_I)
+#define CTL_O LCTL_T(US_O)
+#define SHFT_U LSFT_T(US_U)
 #define ALT_COM LALT_T(US_COMM)
-#define ALT_P   LALT_T(US_P)
-#define SHFT_T  RSFT_T(US_T)
-#define CTL_S   LCTL_T(US_S)
-#define SYM_R   LT(_SYML,US_R)
-#define NUM_N   LT(_NUM,US_N)
-#define MOUS_J  LT(_MOUS,US_J)
-#define FUN_M   LT(_FUN,US_M)
-
-#define QU_Q LT(0,QU)
+#define ALT_P LALT_T(US_P)
+#define SHFT_T RSFT_T(US_T)
+#define CTL_S LCTL_T(US_S)
+#define SYM_R LT(_SYML, US_R)
+#define NUM_N LT(_NUM, US_N)
+#define MOUS_J LT(_MOUS, US_J)
+#define FUN_M LT(_FUN, US_M)
+#define QU_Q LT(0, QU)
 #define GAME TG(_GAME)
 
 // #####################################################################
@@ -62,39 +64,36 @@ enum custom_keycodes_ {
 // #####################################################################
 // #define DIRECT_KANA
 
-#define JP_RANGE QK_USER+100
-
+#define NAV_と LT(_NAV, JP_と)
+#define SYM_い LT(_SYMR, JP_い)
+#define SYM_な LT(_SYML, JP_な)
+#define NUM_う LT(_NUM, JP_う)
+#define JP2 OSL(_JP2)
+#define JP3 OSL(_JP3)
 #define JP_MHEN KC_INT5 // Muhenkan (無変換) -> no convertion
 #define JP_HENK KC_INT4 // Henkan (変換) -> convertion to kanji
 #define JP_KANA KC_INT2 // Katakana ↔ Hiragana ↔ Rōmaji (カタカナ ↔ ひらがな ↔ ローマ字)
 
-#ifndef DIRECT_KANA
-
-// #include "sendstring_us_international.h"
-#define SS_KC(keycode, string) case keycode: if(record->event.pressed) SEND_STRING(string); return false;
-
-#else
-#define TAP_CODE(keycode, tapcode) case keycode: if(record->event.pressed) {tap_code16(tapcode);} return false;
-#define TAP_CODES(keycode, tapcode_1, tapcode_2) case keycode: if(record->event.pressed) {tap_code16(tapcode_1); tap_code16(tapcode_2);} return false;
-
-#endif
-
+#define JP_RANGE QK_USER + 100
+// clang-format off
 enum japanese_keycodes_ {
-    JP_A=JP_RANGE  ,JP_KA,	JP_SA,	JP_TA,	JP_NA,	JP_HA,	JP_MA,	JP_YA,	JP_RA,  JP_WA,
-    JP_I           ,JP_KI,	JP_SI,	JP_TI,	JP_NI,	JP_HI,	JP_MI,	        JP_RI,  JP_WI,
-    JP_U           ,JP_KU,	JP_SU,	JP_TU,	JP_NU,	JP_HU,	JP_MU,	JP_YU,	JP_RU,
-    JP_E           ,JP_KE,	JP_SE,	JP_TE,	JP_NE,	JP_HE,	JP_ME,	        JP_RE,  JP_WE,
-    JP_O           ,JP_KO,	JP_SO,	JP_TO,	JP_NO,	JP_HO,	JP_MO,	JP_YO,	JP_RO,  JP_WO,  JP_N,
+    JP_あ=JP_RANGE  ,JP_か,	JP_さ,	JP_た,	JP_な,	JP_は,	JP_ま,	JP_や,	JP_ら,  JP_わ,
+    JP_い           ,JP_き,	JP_し,	JP_ち,	JP_に,	JP_ひ,	JP_み,	        JP_り,  JP_ゐ,
+    JP_う           ,JP_く,	JP_す,	JP_つ,	JP_ぬ,	JP_ふ,	JP_む,	JP_ゆ,	JP_る,
+    JP_え           ,JP_け,	JP_せ,	JP_て,	JP_ね,	JP_へ,	JP_め,	        JP_れ,  JP_ゑ,
+    JP_お           ,JP_こ,	JP_そ,	JP_と,	JP_の,	JP_ほ,	JP_も,	JP_よ,	JP_ろ,  JP_を,  JP_ん,
 
-                    JP_GA,  JP_ZA,  JP_DA,          JP_BA,  JP_PA,
-                    JP_GI,  JP_ZI,  JP_DI,          JP_BI,  JP_PI,
-    JP_VU          ,JP_GU,  JP_ZU,  JP_DU,          JP_BU,  JP_PU,
-                    JP_GE,  JP_ZE,  JP_DE,          JP_BE,  JP_PE,
-                    JP_GO,  JP_ZO,  JP_DO,          JP_BO,  JP_PO,
+                    JP_が,  JP_ざ,  JP_だ,          JP_ば,  JP_ぱ,
+                    JP_ぎ,  JP_じ,  JP_ぢ,          JP_び,  JP_ぴ,
+    JP_ゔ          ,JP_ぐ,  JP_ず,  JP_づ,          JP_ぶ,  JP_ぷ,
+                    JP_げ,  JP_ぜ,  JP_で,          JP_べ,  JP_ぺ,
+                    JP_ご,  JP_ぞ,  JP_ど,          JP_ぼ,  JP_ぽ,
 
-    JP_S_A         ,JP_S_KA,                                        JP_S_YA,        JP_S_WA,
-    JP_S_I         ,
-    JP_S_U         ,                JP_S_TU,                        JP_S_YU,
-    JP_S_E         ,JP_S_KE,
-    JP_S_O         ,                                                JP_S_YO,
+    JP_ぁ         ,JP_ヵ,                                        JP_ゃ,        JP_ゎ,
+    JP_ぃ         ,
+    JP_ぅ         ,                JP_っ,                        JP_ゅ,
+    JP_ぇ         ,JP_ヶ,
+    JP_ぉ         ,                                              JP_ょ,
+    JP_RANGE_END,
 };
+// clang-format on

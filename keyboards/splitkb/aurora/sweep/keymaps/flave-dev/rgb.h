@@ -4,6 +4,7 @@
 #include "action_code.h"
 #include "color.h"
 
+// clang-format off
 uint8_t led_map[] = {
         0, 1, 2,        25,24,23,
         3, 4, 5,        28,27,26,
@@ -13,53 +14,55 @@ uint8_t led_map[] = {
     16,17,18,19,20,  39,40,41,42,43,
              21,22,  44,45,
 };
+// clang-format on
 
 enum colors_names {
     BLACK_C,
-    BASE_C ,
-    SHRT_C ,
-    FUN_C  ,
-    BSYM_C ,
-    NUM_C  ,
-    NUMP_C ,
-    NAV_C  ,
+    BASE_C,
+    SHRT_C,
+    FUN_C,
+    BSYM_C,
+    NUM_C,
+    NUMP_C,
+    NAV_C,
     MOUSE_C,
-    GAME_C ,
-    JP1_C  ,
-    JP2_C  ,
-    JP3_C  ,
-    JP4_C  ,
-    JPS_C  ,
-    MOD_C  ,
+    GAME_C,
+    JP1_C,
+    JP2_C,
+    JP3_C,
+    JP4_C,
+    JPS_C,
+    MOD_C,
 };
 
 rgb_t rgb_colors[] = {
-    [BLACK_C]={0   ,   0,   0},
-    [BASE_C ]={0xF2,0x24,0x9E},
+    [BLACK_C] = {0, 0, 0},
+    [BASE_C]  = {0xF2, 0x24, 0x9E},
     // [BASE_C ]={0xB4,0xB4,0xB4},
-    [SHRT_C ]={0xFF,0x70,0x00},
-    [FUN_C  ]={  10,  50,  10},
-    [BSYM_C ]={  35, 101, 244},
-    [NUM_C  ]={0x00,0xFF,0x51},
-    [NUMP_C ]={  10,  50,  10},
-    [NAV_C  ]={  54,  74, 225},
-    [MOUSE_C]={  31,  54, 225},
-    [GAME_C ]={ 100,  10,  10},
-    [JP1_C  ]={0x70,0x1c,0xe2},
-    [JP2_C  ]={0xe2,0xa5,0x1c},
-    [JP3_C  ]={0x1c,0xe2,0x65},
-    [JP4_C  ]={0xe2,0x1c,0x1c},
-    [JPS_C  ]={0x1c,0x65,0xe2},
-    [MOD_C  ]={0x60,0x22,0xF3},
+    [SHRT_C]  = {0xFF, 0x70, 0x00},
+    [FUN_C]   = {10, 50, 10},
+    [BSYM_C]  = {35, 101, 244},
+    [NUM_C]   = {0x00, 0xFF, 0x51},
+    [NUMP_C]  = {10, 50, 10},
+    [NAV_C]   = {54, 74, 225},
+    [MOUSE_C] = {31, 54, 225},
+    [GAME_C]  = {100, 10, 10},
+    [JP1_C]   = {0x70, 0x1c, 0xe2},
+    [JP2_C]   = {0xe2, 0xa5, 0x1c},
+    [JP3_C]   = {0x1c, 0xe2, 0x65},
+    [JP4_C]   = {0xe2, 0x1c, 0x1c},
+    [JPS_C]   = {0x1c, 0x65, 0xe2},
+    [MOD_C]   = {0x60, 0x22, 0xF3},
 };
 
-void rgb_matrix_set_layer(enum colors_names rgb_layer[static RGB_MATRIX_LED_COUNT]){
-    for(int i=0; i<RGB_MATRIX_LED_COUNT; i++){
+void rgb_matrix_set_layer(enum colors_names rgb_layer[static RGB_MATRIX_LED_COUNT]) {
+    for (int i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
         rgb_t col = rgb_colors[rgb_layer[i]];
-        rgb_matrix_set_color(led_map[i], col.r,col.g,col.b);
+        rgb_matrix_set_color(led_map[i], col.r, col.g, col.b);
     }
 }
 
+// clang-format off
 enum colors_names rgb_base[] = {
             BASE_C ,BASE_C ,BASE_C ,                     BASE_C ,BASE_C ,BASE_C ,
             BASE_C ,BASE_C ,BASE_C ,                     BASE_C ,BASE_C ,BASE_C ,
@@ -168,12 +171,4 @@ enum colors_names rgb_jap3[] = {
     BLACK_C,BLACK_C,JP3_C  ,JP3_C  ,JP3_C  ,     JP2_C  ,JPS_C  ,JPS_C  ,BLACK_C,BLACK_C,
                             JP4_C  ,JP1_C  ,     BASE_C ,JP4_C  ,
 };
-enum colors_names rgb_jap4[] = {
-            JP4_C  ,JP4_C  ,JP4_C  ,                     JP4_C  ,JP4_C  ,JP4_C  ,
-            JP4_C  ,JP4_C  ,JP4_C  ,                     JP4_C  ,JP4_C  ,JP4_C  ,
-
-    JP4_C  ,BLACK_C,BLACK_C,JP4_C  ,JP4_C  ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
-    BLACK_C,BLACK_C,BLACK_C,BLACK_C,JP4_C  ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
-    BLACK_C,BLACK_C,BLACK_C,BLACK_C,JP4_C  ,     BLACK_C,BLACK_C,BLACK_C,BLACK_C,BLACK_C,
-                            JP4_C  ,BLACK_C,     BLACK_C,JP4_C  ,
-};
+// clang-format on

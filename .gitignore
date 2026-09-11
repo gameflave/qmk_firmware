@@ -130,4 +130,3 @@ via*.json
 /keyboards/**/keymaps/vial/*
 
 .direnv/
-.envrc
